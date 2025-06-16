@@ -2,13 +2,15 @@ import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
 import Footer from '@/components/Footer'
+import FAQ from '@/components/FAQ'
+import About from "@/components/About";
 
 export default function Home() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
             <Header />
             <Features />
-            <main> 
+            <main>
                 <Hero />
                 <section id="subscribe" className="py-16 bg-white">
                     <div className="max-w-4xl mx-auto px-4 text-center">
@@ -23,7 +25,14 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+                <About />
+                <section id="faq" className="py-16 bg-white">
+                    <div className="max-w-4xl mx-auto px-4">
+                        <FAQ />
+                    </div>
+                </section>
             </main>
+
             <Footer />
         </div>
     )
