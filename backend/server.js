@@ -7,6 +7,10 @@ const PORT = process.env.PORT || 5001;
 const weatherRoutes = require('./routes/weather');
 app.use('/api/weather', weatherRoutes);
 
+// Import and use event routes
+const eventRoutes = require('./routes/events');
+app.use('/api/events', eventRoutes);
+
 // Enhanced server startup with weather API validation
 app.listen(PORT, async () => {
     console.log(`🚀 Weather Event Notifier API Server running on port ${PORT}`);
