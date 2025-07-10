@@ -1,7 +1,11 @@
 require('dotenv').config();
 const app = require('./app');
+const connectDB = require('./config/database');
 
 const PORT = process.env.PORT || 5001;
+
+// Connecting to MongoDB
+connectDB();
 
 // Import and use weather routes
 const weatherRoutes = require('./routes/weather');
@@ -40,4 +44,9 @@ app.listen(PORT, async () => {
     console.log(`   GET  /api/weather/city/:cityName - Get weather by city`);
     console.log(`   GET  /api/weather/coordinates/:lat/:lon - Get weather by coordinates`);
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-});
+    console.log('📊 Database & Subscription Features:');
+    console.log(`   POST /subscribe - Create new subscription (MongoDB)`);
+    console.log(`   GET  /subscribers - Get all subscribers`);
+    console.log(`   GET  /status - Server status with DB subscriber count`);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+}); 

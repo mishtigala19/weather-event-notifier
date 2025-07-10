@@ -24,8 +24,6 @@ app.use((err, req, res, next) => {
     next();
 });
 
-const subscribers = []
-
 // Routes
 app.get('/', (req, res) => {
     res.json({
@@ -36,35 +34,28 @@ app.get('/', (req, res) => {
     });
 });
 
-app.post('/subscribe', (req, res) => {
-    const { username, email, phone } = req.body
-    if (!username || !email || !phone) {
-        return res.status(400).json({ error: 'Username, email, and phone are all required' })
+const Subscription = require('./models/Subscription')
+
+app.post('/subscribe', async (req, res) => {
+    try {
+        const subscription = await Subscription.create(req.body);
+        res.status(201).json({ message: 'Subscription saved!', subscription });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
     }
-    // Email format check
-    const emailPattern = /^[^@]+@[^@]+\.[^@]+$/
-    if (!emailPattern.test(email)) {
-        return res.status(400).json({ error: 'Invalid email format' })
-    }
-    // Phone format check: country code and number
-    const phonePattern = /^\+\d{1,4}\s?\d{4,14}$/
-    if (!phonePattern.test(phone)) {
-        return res.status(400).json({ error: 'Invalid phone number format' })
-    }
-    subscribers.push({ username, email, phone, subscribedAt: new Date() })
-    res.status(201).json({ message: `Thanks for subscribing, ${username}!` })
-})
+});
 
 app.get('/trigger', (req, res) => {
     res.json({ message: `Notifications triggered for ${subscribers.length} subscribers.` })
-})
+});
 
-app.get('/status', (req, res) => {
-    res.json({
-        uptime: `${process.uptime().toFixed(2)} seconds`,
-        activeSubscribers: subscribers.length,
-        serverTime: new Date().toISOString()
-    })
-})
+app.get('/status', async (req, res) => {
+    try {
+        const count = await Subscription.countDocuments({ isActive: true });
+        res.json({ uptime: `${process.uptime().toFixed(2)} seconds`, activeSubscribers: count, serverTime: new Date().toISOString() });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch subscriber count' });
+    }
+});
 
 module.exports = app
