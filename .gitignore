@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -16,10 +17,14 @@
 # next.js
 /.next/
 /out/
+.next/*
+.next/
 
 # production
 /build
 build/
+dist/
+out/
 
 # misc
 .DS_Store
@@ -54,8 +59,6 @@ dist/
 .env.local
 .env.production
 
-# Node modules
-node_modules/
 
 # Logs
 *.log
