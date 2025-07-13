@@ -11,7 +11,7 @@ const subscriptionSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: false,
+        required: true,
         trim: true,
         match: [/^\+?[\d\s\-\(\)]{10,}$/, 'Please enter a valid phone number']
     },

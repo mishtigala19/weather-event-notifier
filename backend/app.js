@@ -36,7 +36,26 @@ app.get('/', (req, res) => {
 
 const Subscription = require('./models/Subscription')
 
+//to validate email and phone number
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^\+?[0-9]{10,15}$/;
+
 app.post('/subscribe', async (req, res) => {
+    const { email, phone } = req.body;
+    const errors = [];
+
+    if (!email || !emailRegex.test(email)) {
+        errors.push('Invalid email address');
+    }
+
+    if (phone && !phoneRegex.test(phone)) {
+        errors.push('Invalid phone number');
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).json({ errors });
+    }
+
     try {
         const subscription = await Subscription.create(req.body);
         res.status(201).json({ message: 'Subscription saved!', subscription });
