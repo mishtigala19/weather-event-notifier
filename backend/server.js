@@ -1,6 +1,8 @@
 require('dotenv').config();
 const app = require('./app');
 const connectDB = require('./config/database');
+const subscriptionRoutes = require('./routes/subscription');
+
 
 const PORT = process.env.PORT || 5001;
 
@@ -14,6 +16,8 @@ app.use('/api/weather', weatherRoutes);
 // Import and use event routes
 const eventRoutes = require('./routes/events');
 app.use('/api/events', eventRoutes);
+
+app.use('/api/subscription', subscriptionRoutes);
 
 // Enhanced server startup with weather API validation
 app.listen(PORT, async () => {
