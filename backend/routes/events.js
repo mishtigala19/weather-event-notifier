@@ -139,12 +139,10 @@ async function notifySubscribers(cityName, detectedEvents) {
     for (const subscriber of subs) {
         for (const event of detectedEvents) {
             if (subscriber.alertTypes.includes(event.type)) {
-                const smsUnsubLink = `http://localhost:3001/unsubscribe/sms?phone=${encodeURIComponent(subscriber.phone)}`;
-                const fullUnsubLink = `http://localhost:3001/unsubscribe/all?phone=${encodeURIComponent(subscriber.phone)}`;
+                const unsubLink = `http://localhost:3001/api/subscription/${subscriber._id}/unsubscribe`;
 
                 const message = `Weather alert for ${cityName}: ${event.title} - ${event.description}. 
-                                To stop SMS: ${smsUnsubLink} 
-                                To unsubscribe fully: ${fullUnsubLink}`;
+                                To unsubscribe from all alerts, click: ${unsubLink}`;
 
                 await sendSMS(subscriber.phone, message);
             }
