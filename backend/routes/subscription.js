@@ -68,4 +68,23 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+/**
+ * GET /api/subscription/:id/unsubscribe
+ * Alias for the DELETE route so users can click a link.
+ */
+
+router.get('/:id/unsubscribe', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await Subscription.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).send('Subscription not found.');
+    }
+    res.send('You have been unsubscribed from all weather alerts. Stay safe!');
+  }
+  catch (error) {
+    res.status(500).send('Error processing unsubscribe request.');
+  }
+});
+
 module.exports = router;
