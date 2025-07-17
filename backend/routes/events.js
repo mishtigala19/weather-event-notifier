@@ -1,6 +1,8 @@
 const express = require('express');
 const weatherService = require('../services/weatherService');
 const eventDetector = require('../services/eventDetector');
+const Subscription = require('../models/Subscription');
+const { sendSMS } = require('../services/smsService');
 const router = express.Router();
 
 /**
@@ -121,5 +123,33 @@ router.get('/test', async (req, res) => {
         });
     }
 });
+
+/**
+ * Notify SMS subscribers in MongoDB whose
+ * city matches and who have opted into the event type.
+ */
+
+async function notifySubscribers(cityName, detectedEvents) {
+    const subs = await Subscription.find({
+        'location.city': cityName,
+        isActive: true,
+        notificationMethods: { $in: ['sms'] }
+    });
+
+    for (const subscriber of subs) {
+        for (const event of detectedEvents) {
+            if (subscriber.alertTypes.includes(event.type)) {
+                const smsUnsubLink = `http://localhost:3001/unsubscribe/sms?phone=${encodeURIComponent(subscriber.phone)}`;
+                const fullUnsubLink = `http://localhost:3001/unsubscribe/all?phone=${encodeURIComponent(subscriber.phone)}`;
+
+                const message = `Weather alert for ${cityName}: ${event.title} - ${event.description}. 
+                                To stop SMS: ${smsUnsubLink} 
+                                To unsubscribe fully: ${fullUnsubLink}`;
+
+                await sendSMS(subscriber.phone, message);
+            }
+        }
+    }
+}
 
 module.exports = router;
