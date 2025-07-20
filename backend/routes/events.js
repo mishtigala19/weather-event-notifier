@@ -172,7 +172,7 @@ async function notifySubscribers(cityName, detectedEvents, weatherData) {
     try {
         // Find all active subscribers for this city
         const subs = await Subscription.find({
-            'location.city': cityName,
+            'location.city': { $regex: new RegExp(cityName, 'i') }, // Case-insensitive city matching
             isActive: true
         });
 
