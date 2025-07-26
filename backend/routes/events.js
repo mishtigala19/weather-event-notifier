@@ -1,6 +1,9 @@
 const express = require('express');
 const weatherService = require('../services/weatherService');
 const eventDetector = require('../services/eventDetector');
+const Subscription = require('../models/Subscription');
+const { sendSMS } = require('../services/smsService');
+const { sendEmailAlert } = require('../services/emailService');
 const router = express.Router();
 
 /**
@@ -20,16 +23,20 @@ router.get('/city/:cityName', async (req, res) => {
             });
         }
 
-
         // Get weather data
         const weatherData = await weatherService.getWeatherByCity(cityName);
 
         // Detect events
         const eventSummary = eventDetector.getEventSummary(weatherData);
 
+        // Notify subscribers if events are detected
+        if (eventSummary && eventSummary.length > 0) {
+            await notifySubscribers(cityName, eventSummary, weatherData);
+        }
+
         res.json({
             success: true,
-            message: 'Event detection for ${cityName}',
+            message: `Event detection for ${cityName}`,
             data: {
                 weather: weatherData,
                 events: eventSummary
@@ -44,7 +51,6 @@ router.get('/city/:cityName', async (req, res) => {
     }
 });
 
-
 /**
  * Detect weather events for coordinates
  * GET /api/events/coordinates/:lat/:lon
@@ -53,7 +59,6 @@ router.get('/city/:cityName', async (req, res) => {
 router.get('/coordinates/:lat/:lon', async (req, res) => {
     try {
         const { lat, lon } = req.params;
-
 
         // Validate coordinates
         const latitude = parseFloat(lat);
@@ -66,16 +71,21 @@ router.get('/coordinates/:lat/:lon', async (req, res) => {
             });
         }
 
-
         // Get weather data
         const weatherData = await weatherService.getWeatherByCoordinates(latitude, longitude);
 
         // Detect events
         const eventSummary = eventDetector.getEventSummary(weatherData);
 
+        // Notify subscribers if events are detected
+        if (eventSummary && eventSummary.length > 0) {
+            const cityName = weatherData.name || `${latitude},${longitude}`;
+            await notifySubscribers(cityName, eventSummary, weatherData);
+        }
+
         res.json({
             success: true,
-            message: 'Event detection for coordinates ${lat}, ${lon}',
+            message: `Event detection for coordinates ${lat}, ${lon}`,
             data: {
                 weather: weatherData,
                 events: eventSummary
@@ -84,12 +94,11 @@ router.get('/coordinates/:lat/:lon', async (req, res) => {
     } catch (error) {
         res.status(400).json({
             success: false,
-            message: 'Faled to detect weather events', 
+            message: 'Failed to detect weather events', 
             error: error.message
         });
     }
 });
-
 
 /**
  * Test event detection with sample data
@@ -98,7 +107,6 @@ router.get('/coordinates/:lat/:lon', async (req, res) => {
 
 router.get('/test', async (req, res) => {
     try {
-
         // Getting weather data for test city
         const weatherData = await weatherService.getWeatherByCity('Phoenix'); // warm/hot city
 
@@ -121,5 +129,97 @@ router.get('/test', async (req, res) => {
         });
     }
 });
+
+/**
+ * Test email functionality
+ * GET /api/events/test-email
+ */
+
+router.get('/test-email', async (req, res) => {
+    try {
+        const testResult = await sendEmailAlert(
+            'test@example.com', // Replace with your email for testing
+            'Test Weather Alert',
+            'Rain Alert',
+            {
+                weather: [{ description: 'light rain' }],
+                main: { temp: 298.55 },
+                name: 'Boston'
+            },
+            'Boston'
+        );
+        
+        res.json({
+            success: true,
+            message: 'Test email sent',
+            result: testResult
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Failed to send test email',
+            details: error.message
+        });
+    }
+});
+
+/**
+ * Notify both SMS and Email subscribers in MongoDB whose
+ * city matches and who have opted into the event type.
+ */
+
+async function notifySubscribers(cityName, detectedEvents, weatherData) {
+    try {
+        // Find all active subscribers for this city
+        const subs = await Subscription.find({
+            'location.city': { $regex: new RegExp(cityName, 'i') }, // Case-insensitive city matching
+            isActive: true
+        });
+
+        console.log(`Found ${subs.length} subscribers for ${cityName}`);
+
+        for (const subscriber of subs) {
+            for (const event of detectedEvents) {
+                // Check if subscriber is interested in this event type
+                if (subscriber.alertTypes.includes(event.type)) {
+                    const unsubLink = `${process.env.BASE_URL || 'http://localhost:3001'}/api/subscription/${subscriber._id}/unsubscribe`;
+
+                    // Send SMS if subscriber prefers SMS
+                    if (subscriber.notificationMethods.includes('sms') && subscriber.phone) {
+                        const smsMessage = `Weather alert for ${cityName}: ${event.title} - ${event.description}. 
+                                          To unsubscribe from all alerts, click: ${unsubLink}`;
+
+                        try {
+                            await sendSMS(subscriber.phone, smsMessage);
+                            console.log(`SMS sent to ${subscriber.phone} for ${event.type}`);
+                        } catch (smsError) {
+                            console.error(`Failed to send SMS to ${subscriber.phone}:`, smsError.message);
+                        }
+                    }
+
+                    // Send Email if subscriber prefers email
+                    if (subscriber.notificationMethods.includes('email') && subscriber.email) {
+                        const subject = `${event.title} - ${cityName}`;
+                        
+                        try {
+                            await sendEmailAlert(
+                                subscriber.email,
+                                subject,
+                                event.title,
+                                weatherData,
+                                cityName
+                            );
+                            console.log(`Email sent to ${subscriber.email} for ${event.type}`);
+                        } catch (emailError) {
+                            console.error(`Failed to send email to ${subscriber.email}:`, emailError.message);
+                        }
+                    }
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error notifying subscribers:', error);
+    }
+}
 
 module.exports = router;

@@ -1,6 +1,8 @@
 const express = require('express');
 const weatherService = require('../services/weatherService');
 const router = express.Router();
+const mapWeatherCodeToAlert = require('../utils/mapWeatherCode');
+
 
 /**
  * Test API connection
@@ -49,11 +51,15 @@ router.get('/city/:cityName', async (req, res) => {
     }
 
     const weatherData = await weatherService.getWeatherByCity(cityName);
+    const weatherCode = weatherData.weather[0].id;
+    const alertType = mapWeatherCodeToAlert(weatherCode);
+
     
     res.json({
       success: true,
       message: `Weather data for ${cityName}`,
-      data: weatherData
+      data: weatherData,
+      alert: alertType
     });
   } catch (error) {
     res.status(400).json({

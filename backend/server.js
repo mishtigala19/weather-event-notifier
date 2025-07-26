@@ -1,7 +1,12 @@
 require('dotenv').config();
 const app = require('./app');
 const connectDB = require('./config/database');
+<<<<<<< HEAD
 const WeatherScheduler = require('./services/scheduler');
+=======
+const subscriptionRoutes = require('./routes/subscription');
+
+>>>>>>> f024ecb6f33b1d82dec3855009feffa40e4f5657
 
 const PORT = process.env.PORT || 5001;
 
@@ -15,6 +20,8 @@ app.use('/api/weather', weatherRoutes);
 // Import and use event routes
 const eventRoutes = require('./routes/events');
 app.use('/api/events', eventRoutes);
+
+app.use('/api/subscription', subscriptionRoutes);
 
 // Enhanced server startup with weather API validation
 app.listen(PORT, async () => {
