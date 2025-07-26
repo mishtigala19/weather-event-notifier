@@ -74,6 +74,41 @@ const subscriptionSchema = new mongoose.Schema({
     lastNotified: {
         type: Date,
         default: null
+    },
+
+    // Scheduler fields
+    lastChecked: {
+        type: Date, 
+        default: null
+    },
+
+    timezone: {
+        type: String, 
+        default: 'America/New_York',
+        required: false
+    },
+
+    checkInterval: {
+        type: Number,
+        default: 30, // check every 30 sec by default
+        min: 15, // minimum 15 min
+        max: 1400 // max once per day
+    },
+
+    alertCooldown:{
+        type: Number,
+        default: 60, // don't send same alert type more than once per hour
+    },
+
+    quietHours:{
+        start: {
+            type: String,
+            default: '22:00' 
+        },
+        end: {
+            type: String,
+            default: '07:00'
+        }
     }
 });
 
@@ -81,5 +116,7 @@ const subscriptionSchema = new mongoose.Schema({
 subscriptionSchema.index({ email: 1 });
 subscriptionSchema.index({ 'location.city': 1 });
 subscriptionSchema.index({ isActive: 1 });
+subscriptionSchema.index({ lastChecked: 1 });
+subscriptionSchema.index({ timezone: 1 });
 
 module.exports = mongoose.model('Subscription', subscriptionSchema);
