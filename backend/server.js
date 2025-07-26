@@ -1,13 +1,8 @@
 require('dotenv').config();
 const app = require('./app');
 const connectDB = require('./config/database');
-<<<<<<< HEAD
 const WeatherScheduler = require('./services/scheduler');
-=======
 const subscriptionRoutes = require('./routes/subscription');
-
->>>>>>> f024ecb6f33b1d82dec3855009feffa40e4f5657
-
 const PORT = process.env.PORT || 5001;
 
 // Connecting to MongoDB
@@ -40,7 +35,6 @@ app.listen(PORT, async () => {
 
             // Start weather scheduling after API successful connection
             console.log('🕐 Starting weather alert scheduler...');
-            const WeatherScheduler = require('./services/scheduler');
             const scheduler = new WeatherScheduler();
             scheduler.startPeriodicChecks();
             console.log('✅ Weather Scheduler started - checking every 30 minutes.');
