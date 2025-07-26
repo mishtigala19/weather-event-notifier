@@ -149,37 +149,48 @@ class WeatherScheduler {
 
     // Send email alert
     async sendEmailAlert(email, alerts, weatherData, location) {
-        const alertList = alerts.map(alert =>
-            `• ${alert.type.toUpperCase()}: ${alert.message}`
-        ).join('\n');
+        try {
+            // Create a subject based on the first alert
+            const firstAlert = alerts[0];
+            const subject = `${firstAlert.title} - ${location.city}`;
 
-        const subject = `Weather Alert for ${location.city}`;
-        const message = `
-Weather Alert for ${location.city}
+            const result = await emailService.sendEmailAlert(
+                email,
+                subject,
+                firstAlert.type,
+                weatherData,
+                location.city
+            );
 
-Current Conditions:
-• Temperature: ${Math.round(weatherData.main.temp - 273.15)}°C
-• Weather: ${weatherData.weather[0].description}
+            if (!result.success) {
+                throw new Error(result.error);
+            }
 
-Active Alerts:
-${alertList}
-
----
-This is an automated alert from Weather Event Notifier.
-To unsubscribe, visit: ${process.env.FRONTEND_URL || 'http://localhost:3000'}/unsubscribe
-        `.trim();
-
-        await emailService.sendEmail(email, subject, message);
+            return result;
+        } catch(error) {
+            console.error('❌ Email sending failure:', error.message);
+            throw error;
+        }
     }
 
     // Send SMS alert
     async sendSMSAlert(phone, alerts, weatherData, location) {
-        const temp = Math.round(weatherData.main.temp - 273.15);
-        const alertTypes = alerts.map(a => a.type.toUpperCase()).join(', ');
+        try {
+            const temp = Math.round(weatherData.main.temp - 273.15);
+            const alertTypes = alerts.map(a => a.title).join(', ');
 
-        const message = `Weather Alert for ${location.city}: ${alertTypes}. Current: ${temp}°C, ${weatherData.weather[0].description}. Unsubscribe: ${process.env.FRONTEND_URL || 'localhost:3000'}/unsubscribe`;
+            // Create message with unsubscribe link
+            const unsubscribeLink = `${process.env.BASE_URL || 'http://localhost:3001'}/api/unsubscribe?phone=${encodeURIComponent(phone)}`;
 
-        await smsService.sendSMS(phone, message);
+            const message = `Weather Alert for ${location.city}: ${alertTypes}. Current: ${temp}°C, ${weatherData.weather[0].description}. Unsubscribe: ${unsubscribeLink}`;
+
+            const result = await smsService.sendSMS(phone, message);
+
+            return result;
+        } catch (error) {
+            console.error(`❌ SMS sending failed:`, error.message);
+            throw error;
+        }
     }
 
     // Checks if current time is in the user's quiet hours
