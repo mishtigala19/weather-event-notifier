@@ -1,9 +1,8 @@
 require('dotenv').config();
 const app = require('./app');
 const connectDB = require('./config/database');
+const WeatherScheduler = require('./services/scheduler');
 const subscriptionRoutes = require('./routes/subscription');
-
-
 const PORT = process.env.PORT || 5001;
 
 // Connecting to MongoDB
@@ -33,13 +32,21 @@ app.listen(PORT, async () => {
         if (testResult.success) {
             console.log('✅ OpenWeatherMap API connection verified');
             console.log(`🌡️ Test data: ${testResult.testData.city} - ${testResult.testData.temperature}°C`);
+
+            // Start weather scheduling after API successful connection
+            console.log('🕐 Starting weather alert scheduler...');
+            const scheduler = new WeatherScheduler();
+            scheduler.startPeriodicChecks();
+            console.log('✅ Weather Scheduler started - checking every 30 minutes.');
         } else {
             console.log('⚠️ OpenWeatherMap API connection failed:', testResult.error);
             console.log('📝 Server will continue running, but weather features may not work');
+            console.log('⚠️ Scheduler not started due to API connection failure.')
         }
     } catch (error) {
         console.log('⚠️ Weather service initialization failed:', error.message);
         console.log('📝 Make sure to create services/weatherService.js and add OPENWEATHER_API_KEY to .env');
+        console.log('⚠️ Scheduler not started due to weather service failure.')
     }
     
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -52,5 +59,10 @@ app.listen(PORT, async () => {
     console.log(`   POST /subscribe - Create new subscription (MongoDB)`);
     console.log(`   GET  /subscribers - Get all subscribers`);
     console.log(`   GET  /status - Server status with DB subscriber count`);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('⏰ Scheduler Features:');
+    console.log(`   Automatic weather checks every 30 minutes`);
+    console.log(`   Smart alert cooldowns to prevent spam`);
+    console.log(`   Timezone-aware notifications`);
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 }); 
