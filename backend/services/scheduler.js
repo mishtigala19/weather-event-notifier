@@ -36,23 +36,22 @@ class WeatherScheduler {
     // Main method to check all active subs
     async checkAllSubscriptions() {
         try {
-            // Find all active subs that need checking
-            const subscriptions = await Subscription.find({
-                isActive: true,
-                $or: [
-                    { lastChecked: null }, // never checked before
-                    {
-                        lastChecked: {
-                            $lt: new Date(Date.now() - 30 * 60 * 1000) // Last checked > 30 min ago
-                        }
-                    }
-                ]
+            const allSubs = await Subscription.find({ isActive: true });
+    
+            const now = Date.now();
+            const dueSubscriptions = allSubs.filter(sub => {
+                const intervalMs = (sub.checkInterval || 30) * 60 * 1000; // Convert to ms
+    
+                if (!sub.lastChecked) return true;
+    
+                const lastCheckedTime = new Date(sub.lastChecked).getTime();
+                return now - lastCheckedTime >= intervalMs;
             });
-
-            console.log(`📊 Found ${subscriptions.length} subscriptions to check`);
-
+    
+            console.log(`📊 Found ${dueSubscriptions.length} subscriptions due for weather check`);
+    
             let alertsSent = 0;
-            for (const subscription of subscriptions) {
+            for (const subscription of dueSubscriptions) {
                 try {
                     const alertSent = await this.checkSubscription(subscription);
                     if (alertSent) alertsSent++;
@@ -60,8 +59,8 @@ class WeatherScheduler {
                     console.error(`❌ Error checking subscription ${subscription._id}:`, error.message);
                 }
             }
-
-            console.log(`✅ Completed check: ${alertsSent} alerts sent out of ${subscriptions.length} subscriptions`);
+    
+            console.log(`✅ Weather check complete: ${alertsSent} alerts sent out of ${dueSubscriptions.length} due subscriptions`);
         } catch (error) {
             console.error('❌ Error in checkAllSubscriptions:', error.message);
         }
