@@ -356,71 +356,45 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$api$2e$ts__$5b
 ;
 const SubscriptionForm = ({ onSuccess })=>{
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
+        location: '',
+        alertType: 'rain',
         email: '',
-        phone: '',
-        location: {
-            city: '',
-            country: 'US'
-        },
-        alertTypes: [],
-        notificationMethods: [],
-        frequency: 'once'
+        phone: ''
     });
     const [isSubmitting, setIsSubmitting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const alertTypeOptions = [
         {
             value: 'rain',
-            label: '🌧️ Rain',
+            label: '🌧️ Rain Alert',
             description: 'Get notified about rain conditions'
         },
         {
             value: 'heat',
-            label: '🌡️ Heat',
+            label: '🌡️ Heat Warning',
             description: 'High temperature warnings'
         },
         {
             value: 'storm',
-            label: '⛈️ Storm',
+            label: '⛈️ Storm Alert',
             description: 'Thunderstorm and severe weather alerts'
         },
         {
             value: 'snow',
-            label: '❄️ Snow',
+            label: '❄️ Snow Alert',
             description: 'Snow and winter weather alerts'
         },
         {
             value: 'wind',
-            label: '💨 Wind',
+            label: '💨 Wind Warning',
             description: 'High wind speed warnings'
         }
     ];
     const handleInputChange = (e)=>{
         const { name, value } = e.target;
-        if (name.includes('.')) {
-            const [parent, child] = name.split('.');
-            setFormData((prev)=>({
-                    ...prev,
-                    [parent]: {
-                        ...prev[parent],
-                        [child]: value
-                    }
-                }));
-        } else {
-            setFormData((prev)=>({
-                    ...prev,
-                    [name]: value
-                }));
-        }
-    };
-    const handleCheckboxChange = (e, field)=>{
-        const { value, checked } = e.target;
         setFormData((prev)=>({
                 ...prev,
-                [field]: checked ? [
-                    ...prev[field],
-                    value
-                ] : prev[field].filter((item)=>item !== value)
+                [name]: value
             }));
     };
     const handleSubmit = async (e)=>{
@@ -428,26 +402,10 @@ const SubscriptionForm = ({ onSuccess })=>{
         setIsSubmitting(true);
         setMessage(null);
         // Validation
-        if (!formData.email || !formData.phone || !formData.location.city) {
+        if (!formData.email || !formData.location) {
             setMessage({
                 type: 'error',
                 text: 'Please fill in all required fields'
-            });
-            setIsSubmitting(false);
-            return;
-        }
-        if (formData.alertTypes.length === 0) {
-            setMessage({
-                type: 'error',
-                text: 'Please select at least one alert type'
-            });
-            setIsSubmitting(false);
-            return;
-        }
-        if (formData.notificationMethods.length === 0) {
-            setMessage({
-                type: 'error',
-                text: 'Please select at least one notification method'
             });
             setIsSubmitting(false);
             return;
@@ -461,21 +419,16 @@ const SubscriptionForm = ({ onSuccess })=>{
                 });
                 // Reset form
                 setFormData({
+                    location: '',
+                    alertType: 'rain',
                     email: '',
-                    phone: '',
-                    location: {
-                        city: '',
-                        country: 'US'
-                    },
-                    alertTypes: [],
-                    notificationMethods: [],
-                    frequency: 'once'
+                    phone: ''
                 });
                 onSuccess?.();
             } else {
                 setMessage({
                     type: 'error',
-                    text: response.errors?.join(', ') || response.error || 'Failed to create subscription'
+                    text: response.error || 'Failed to create subscription'
                 });
             }
         } catch (error) {
@@ -495,13 +448,121 @@ const SubscriptionForm = ({ onSuccess })=>{
                 children: "Subscribe to Weather Alerts"
             }, void 0, false, {
                 fileName: "[project]/src/components/SubscriptionForm.tsx",
-                lineNumber: 122,
+                lineNumber: 81,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                 onSubmit: handleSubmit,
                 className: "space-y-6",
                 children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                htmlFor: "location",
+                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                children: "City *"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 88,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                type: "text",
+                                id: "location",
+                                name: "location",
+                                value: formData.location,
+                                onChange: handleInputChange,
+                                required: true,
+                                className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                placeholder: "Boston"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 91,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "mt-1 text-sm text-gray-500",
+                                children: "Enter your city name"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 101,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 87,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-lg font-semibold text-gray-800",
+                                children: "Alert Type *"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 106,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "grid grid-cols-1 md:grid-cols-2 gap-3",
+                                children: alertTypeOptions.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: `flex items-start space-x-3 p-3 border rounded-md cursor-pointer transition-colors ${formData.alertType === option.value ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:bg-gray-50'}`,
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "radio",
+                                                name: "alertType",
+                                                value: option.value,
+                                                checked: formData.alertType === option.value,
+                                                onChange: handleInputChange,
+                                                className: "mt-1 text-blue-600 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 117,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "font-medium text-gray-900",
+                                                        children: option.label
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                        lineNumber: 126,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "text-sm text-gray-600",
+                                                        children: option.description
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                        lineNumber: 127,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 125,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, option.value, true, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 109,
+                                        columnNumber: 15
+                                    }, this))
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 107,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 105,
+                        columnNumber: 9
+                    }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "space-y-4",
                         children: [
@@ -510,7 +571,7 @@ const SubscriptionForm = ({ onSuccess })=>{
                                 children: "Contact Information"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 129,
+                                lineNumber: 136,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -521,7 +582,7 @@ const SubscriptionForm = ({ onSuccess })=>{
                                         children: "Email Address *"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 132,
+                                        lineNumber: 139,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -535,13 +596,13 @@ const SubscriptionForm = ({ onSuccess })=>{
                                         placeholder: "your.email@example.com"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 135,
+                                        lineNumber: 142,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 131,
+                                lineNumber: 138,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -549,10 +610,10 @@ const SubscriptionForm = ({ onSuccess })=>{
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         htmlFor: "phone",
                                         className: "block text-sm font-medium text-gray-700 mb-1",
-                                        children: "Phone Number *"
+                                        children: "Phone Number (Optional)"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 148,
+                                        lineNumber: 155,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -561,314 +622,31 @@ const SubscriptionForm = ({ onSuccess })=>{
                                         name: "phone",
                                         value: formData.phone,
                                         onChange: handleInputChange,
-                                        required: true,
                                         className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
                                         placeholder: "+1234567890"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 151,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 147,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                        lineNumber: 128,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-4",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "text-lg font-semibold text-gray-800",
-                                children: "Location"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 166,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "grid grid-cols-1 md:grid-cols-2 gap-4",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                htmlFor: "location.city",
-                                                className: "block text-sm font-medium text-gray-700 mb-1",
-                                                children: "City *"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 170,
-                                                columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                type: "text",
-                                                id: "location.city",
-                                                name: "location.city",
-                                                value: formData.location.city,
-                                                onChange: handleInputChange,
-                                                required: true,
-                                                className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-                                                placeholder: "Boston"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 173,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 169,
+                                        lineNumber: 158,
                                         columnNumber: 13
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                htmlFor: "location.country",
-                                                className: "block text-sm font-medium text-gray-700 mb-1",
-                                                children: "Country"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 186,
-                                                columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                type: "text",
-                                                id: "location.country",
-                                                name: "location.country",
-                                                value: formData.location.country,
-                                                onChange: handleInputChange,
-                                                className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-                                                placeholder: "US"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 189,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 185,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 168,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                        lineNumber: 165,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-4",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "text-lg font-semibold text-gray-800",
-                                children: "Alert Types *"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 204,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "grid grid-cols-1 md:grid-cols-2 gap-3",
-                                children: alertTypeOptions.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "flex items-start space-x-3 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                type: "checkbox",
-                                                value: option.value,
-                                                checked: formData.alertTypes.includes(option.value),
-                                                onChange: (e)=>handleCheckboxChange(e, 'alertTypes'),
-                                                className: "mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 208,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "font-medium text-gray-900",
-                                                        children: option.label
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                        lineNumber: 216,
-                                                        columnNumber: 19
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "text-sm text-gray-600",
-                                                        children: option.description
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                        lineNumber: 217,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 215,
-                                                columnNumber: 17
-                                            }, this)
-                                        ]
-                                    }, option.value, true, {
-                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 207,
-                                        columnNumber: 15
-                                    }, this))
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 205,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                        lineNumber: 203,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-4",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "text-lg font-semibold text-gray-800",
-                                children: "Notification Methods *"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 226,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "space-y-2",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "flex items-center space-x-3",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                type: "checkbox",
-                                                value: "email",
-                                                checked: formData.notificationMethods.includes('email'),
-                                                onChange: (e)=>handleCheckboxChange(e, 'notificationMethods'),
-                                                className: "rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 229,
-                                                columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-gray-700",
-                                                children: "📧 Email notifications"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 236,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 228,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "flex items-center space-x-3",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                type: "checkbox",
-                                                value: "sms",
-                                                checked: formData.notificationMethods.includes('sms'),
-                                                onChange: (e)=>handleCheckboxChange(e, 'notificationMethods'),
-                                                className: "rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 239,
-                                                columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-gray-700",
-                                                children: "📱 SMS notifications"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                                lineNumber: 246,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 238,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 227,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                        lineNumber: 225,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-4",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "text-lg font-semibold text-gray-800",
-                                children: "Alert Frequency"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 253,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                name: "frequency",
-                                value: formData.frequency,
-                                onChange: handleInputChange,
-                                className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                        value: "once",
-                                        children: "One-time alerts"
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "mt-1 text-sm text-gray-500",
+                                        children: "Include country code for SMS alerts"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 260,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                        value: "daily",
-                                        children: "Daily alerts"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 261,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                        value: "weekly",
-                                        children: "Weekly alerts"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                        lineNumber: 262,
+                                        lineNumber: 167,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/SubscriptionForm.tsx",
-                                lineNumber: 254,
+                                lineNumber: 154,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/SubscriptionForm.tsx",
-                        lineNumber: 252,
+                        lineNumber: 135,
                         columnNumber: 9
                     }, this),
                     message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -876,7 +654,7 @@ const SubscriptionForm = ({ onSuccess })=>{
                         children: message.text
                     }, void 0, false, {
                         fileName: "[project]/src/components/SubscriptionForm.tsx",
-                        lineNumber: 268,
+                        lineNumber: 173,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -886,13 +664,13 @@ const SubscriptionForm = ({ onSuccess })=>{
                         children: isSubmitting ? 'Creating Subscription...' : 'Subscribe to Weather Alerts'
                     }, void 0, false, {
                         fileName: "[project]/src/components/SubscriptionForm.tsx",
-                        lineNumber: 278,
+                        lineNumber: 183,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/SubscriptionForm.tsx",
-                lineNumber: 126,
+                lineNumber: 85,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -901,18 +679,18 @@ const SubscriptionForm = ({ onSuccess })=>{
                     children: "By subscribing, you agree to receive weather alerts. You can unsubscribe at any time using the link in our notifications."
                 }, void 0, false, {
                     fileName: "[project]/src/components/SubscriptionForm.tsx",
-                    lineNumber: 292,
+                    lineNumber: 197,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/SubscriptionForm.tsx",
-                lineNumber: 291,
+                lineNumber: 196,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/SubscriptionForm.tsx",
-        lineNumber: 121,
+        lineNumber: 80,
         columnNumber: 5
     }, this);
 };

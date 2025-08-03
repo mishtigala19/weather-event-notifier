@@ -692,6 +692,10 @@
     border-top-width: 1px;
   }
 
+  .border-blue-500 {
+    border-color: var(--color-blue-500);
+  }
+
   .border-gray-100 {
     border-color: var(--color-gray-100);
   }
@@ -714,6 +718,10 @@
 
   .border-red-200 {
     border-color: var(--color-red-200);
+  }
+
+  .bg-blue-50 {
+    background-color: var(--color-blue-50);
   }
 
   .bg-blue-300\/30 {
