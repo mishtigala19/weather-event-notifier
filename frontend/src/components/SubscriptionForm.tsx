@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import { api, SubscriptionData } from '@/lib/api';
-
 interface SubscriptionFormProps {
   onSuccess?: () => void;
 }
