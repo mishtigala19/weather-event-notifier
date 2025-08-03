@@ -4,6 +4,7 @@ import Features from '@/components/Features'
 import Footer from '@/components/Footer'
 import FAQ from '@/components/FAQ'
 import About from "@/components/About";
+import SubscriptionForm from '@/components/SubscriptionForm';
 
 export default function Home() {
     return (
@@ -13,16 +14,16 @@ export default function Home() {
             <main>
                 <Hero />
                 <section id="subscribe" className="py-16 bg-white">
-                    <div className="max-w-4xl mx-auto px-4 text-center">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                            Subscribe for weather alerts!
-                        </h2>
-                        <p className="text-gray-600 mb-8">
-                            Subscription form here:
-                        </p>
-                        <div className="bg-gray-100 rounded-lg p-8 border-2 border-dashed border-gray-300">
-                            <p className="text-gray-500">Subscription Form info here...</p>
+                    <div className="max-w-4xl mx-auto px-4">
+                        <div className="text-center mb-8">
+                            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                                Subscribe for Weather Alerts!
+                            </h2>
+                            <p className="text-gray-600 mb-8">
+                                Stay informed about weather conditions in your area with personalized alerts delivered directly to your inbox or phone.
+                            </p>
                         </div>
+                        <SubscriptionForm />
                     </div>
                 </section>
                 <About />
