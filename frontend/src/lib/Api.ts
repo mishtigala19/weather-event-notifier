@@ -5,22 +5,9 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
 
 export interface SubscriptionData {
   email: string;
-  phone: string;
-  location: {
-    city: string;
-    country?: string;
-  };
-  alertTypes: ('rain' | 'heat' | 'storm' | 'snow' | 'wind')[];
-  notificationMethods: ('email' | 'sms')[];
-  frequency: 'once' | 'daily' | 'weekly';
-  thresholds?: {
-    temperature?: {
-      min?: number;
-      max?: number;
-    };
-    windSpeed?: number;
-    precipitation?: number;
-  };
+  phone?: string;  // Made optional since it's optional in the form
+  location: string;  // Changed to string for form compatibility
+  alertType: 'rain' | 'heat' | 'storm' | 'snow' | 'wind';  // Changed from array to single value
 }
 
 export interface ApiResponse<T = any> {
@@ -72,15 +59,30 @@ class ApiService {
 
   // Create a new subscription
   async createSubscription(subscriptionData: SubscriptionData): Promise<ApiResponse> {
+    // Transform the data to match backend expectations
+    const transformedData = {
+      location: {
+        city: subscriptionData.location
+      },
+      alertType: subscriptionData.alertType,
+      email: subscriptionData.email,
+      phone: subscriptionData.phone || ''  // backend expects 'phone' field
+    };
+
     return this.request('/subscribe', {
       method: 'POST',
-      body: JSON.stringify(subscriptionData),
+      body: JSON.stringify(transformedData),
     });
   }
 
   // Get server status
   async getServerStatus(): Promise<ApiResponse> {
     return this.request('/status');
+  }
+
+  // Get all subscribers
+  async getSubscribers(): Promise<ApiResponse> {
+    return this.request('/subscribers');
   }
 
   // Test weather API
@@ -93,9 +95,21 @@ class ApiService {
     return this.request(`/api/weather/city/${encodeURIComponent(city)}`);
   }
 
+  // Detect weather events by city
+  async detectEventsByCity(city: string): Promise<ApiResponse> {
+    return this.request(`/api/events/detect/${encodeURIComponent(city)}`);
+  }
+
   // Delete subscription
   async deleteSubscription(id: string): Promise<ApiResponse> {
     return this.request(`/api/subscription/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Unsubscribe using ID
+  async unsubscribe(id: string): Promise<ApiResponse> {
+    return this.request(`/unsubscribe/${id}`, {
       method: 'DELETE',
     });
   }

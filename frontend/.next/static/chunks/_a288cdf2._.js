@@ -1,0 +1,1704 @@
+(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push([typeof document === "object" ? document.currentScript : undefined, {
+
+"[project]/src/components/FAQ.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/styled-jsx/style.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+;
+const faqData = [
+    {
+        question: "What types of weather alerts can I subscribe to?",
+        answer: "You can subscribe to a variety of weather alerts, including heat warnings, rain forecasts, and extreme weather events such as storms or heavy snowfall. Our system allows you to choose the specific types of alerts that matter most to you."
+    },
+    {
+        question: "How will I receive weather notifications?",
+        answer: "You can choose to receive notifications via email or SMS. During subscription, simply provide your preferred contact information and select your alert delivery method. We use trusted services like Nodemailer for emails and Twilio for SMS to ensure timely delivery."
+    },
+    {
+        question: "How often will I get weather alerts?",
+        answer: "You can opt for either one-time alerts for specific events or set up recurring notifications based on your preferences. We check real-time weather data at user defined intervals and send alerts as soon as relevant conditions are detected."
+    },
+    {
+        question: "Can I customize alerts for my location?",
+        answer: "Absolutely! When you subscribe, you can enter your city or location to receive weather alerts that are tailored just for your area. This way, you’ll always get updates that are relevant to where you live or work."
+    },
+    {
+        question: "Is my contact information safe and can I unsubscribe anytime?",
+        answer: "Yes, your privacy is important to us. Your contact details are securely stored and used only for sending weather alerts. Every notification includes an unsubscribe link, and you can update or remove your subscription at any time."
+    }
+];
+const FAQ = ()=>{
+    _s();
+    const [openIndex, setOpenIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const toggle = (idx)=>{
+        setOpenIndex(openIndex === idx ? null : idx);
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+        className: "jsx-c82beb1537db9d9b" + " " + "my-10",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                className: "jsx-c82beb1537db9d9b" + " " + "text-3xl font-bold mb-8 text-gray-800 text-center",
+                children: "Frequently Asked Questions"
+            }, void 0, false, {
+                fileName: "[project]/src/components/FAQ.tsx",
+                lineNumber: 36,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "jsx-c82beb1537db9d9b" + " " + "max-w-5xl mx-auto px-4 md:px-8 space-y-4",
+                children: faqData.map((item, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "jsx-c82beb1537db9d9b" + " " + "bg-white rounded-xl shadow-md transition hover:shadow-lg",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: ()=>toggle(idx),
+                                onBlur: (e)=>e.target.blur(),
+                                className: "jsx-c82beb1537db9d9b" + " " + `flex items-center justify-between w-full px-6 py-4 text-lg font-semibold focus:outline-none transition-colors duration-300
+                                ${openIndex === idx ? "text-blue-700" : "text-gray-600 hover:text-blue-700"}
+                            `,
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "jsx-c82beb1537db9d9b",
+                                        children: item.question
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/FAQ.tsx",
+                                        lineNumber: 52,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "jsx-c82beb1537db9d9b" + " " + `transform transition-transform duration-300 ${openIndex === idx ? "rotate-180" : ""}`,
+                                        children: "▼"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/FAQ.tsx",
+                                        lineNumber: 53,
+                                        columnNumber: 29
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/FAQ.tsx",
+                                lineNumber: 43,
+                                columnNumber: 25
+                            }, this),
+                            openIndex === idx && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-c82beb1537db9d9b" + " " + "px-6 pb-4 text-base text-gray-500 animate-fadeIn",
+                                children: item.answer
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/FAQ.tsx",
+                                lineNumber: 58,
+                                columnNumber: 29
+                            }, this)
+                        ]
+                    }, idx, true, {
+                        fileName: "[project]/src/components/FAQ.tsx",
+                        lineNumber: 39,
+                        columnNumber: 21
+                    }, this))
+            }, void 0, false, {
+                fileName: "[project]/src/components/FAQ.tsx",
+                lineNumber: 37,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                id: "c82beb1537db9d9b",
+                children: "@keyframes fadeIn{0%{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}.animate-fadeIn.jsx-c82beb1537db9d9b{animation:.3s fadeIn}"
+            }, void 0, false, void 0, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/components/FAQ.tsx",
+        lineNumber: 35,
+        columnNumber: 9
+    }, this);
+};
+_s(FAQ, "7z1SfW1ag/kVV/D8SOtFgmPOJ8o=");
+_c = FAQ;
+const __TURBOPACK__default__export__ = FAQ;
+var _c;
+__turbopack_context__.k.register(_c, "FAQ");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/src/components/About.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+const About = ()=>{
+    _s();
+    const cardRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [visible, setVisible] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "About.useEffect": ()=>{
+            if ("object" === "undefined" || !cardRef.current) return;
+            let timeoutId = null;
+            const observer = new window.IntersectionObserver({
+                "About.useEffect": ([entry])=>{
+                    if (timeoutId) clearTimeout(timeoutId);
+                    // Debounce state change to avoid flicker
+                    timeoutId = setTimeout({
+                        "About.useEffect": ()=>{
+                            setVisible(entry.isIntersecting);
+                        }
+                    }["About.useEffect"], 80);
+                }
+            }["About.useEffect"], {
+                threshold: 0.3
+            });
+            observer.observe(cardRef.current);
+            return ({
+                "About.useEffect": ()=>{
+                    if (timeoutId) clearTimeout(timeoutId);
+                    observer.disconnect();
+                }
+            })["About.useEffect"];
+        }
+    }["About.useEffect"], []);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+        id: "about",
+        className: "py-20 bg-gradient-to-br from-blue-50 via-gray-100 to-indigo-100",
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            ref: cardRef,
+            className: `relative max-w-5xl mx-auto px-8 py-12 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl border border-gray-200
+          transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]
+          ${visible ? "opacity-100 scale-100" : "opacity-0 scale-90"}
+        `,
+            style: {
+                willChange: "opacity, transform"
+            },
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex justify-center mb-6",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "inline-block w-20 h-1 rounded bg-gradient-to-r from-blue-500 via-indigo-400 to-blue-400"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/About.tsx",
+                        lineNumber: 43,
+                        columnNumber: 21
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/components/About.tsx",
+                    lineNumber: 42,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                    className: "text-4xl font-bold text-center text-gray-900 mb-4 tracking-tight",
+                    children: "About Weather Event Notifier"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/About.tsx",
+                    lineNumber: 45,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "text-lg text-gray-700 text-center mb-6 font-medium",
+                    children: "Stay ahead of the weather, always."
+                }, void 0, false, {
+                    fileName: "[project]/src/components/About.tsx",
+                    lineNumber: 48,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "text-base text-gray-600 text-center mb-3",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "font-semibold text-blue-700",
+                            children: "Weather Event Notifier"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/About.tsx",
+                            lineNumber: 52,
+                            columnNumber: 21
+                        }, this),
+                        " is a modern web application designed to keep you informed about significant weather events in your area.",
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                            fileName: "[project]/src/components/About.tsx",
+                            lineNumber: 53,
+                            columnNumber: 21
+                        }, this),
+                        "Receive timely, reliable alerts for heat waves, storms, rain, and more; delivered directly to your inbox or phone."
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/About.tsx",
+                    lineNumber: 51,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "text-base text-gray-600 text-center",
+                    children: "With location based customization and flexible notification options, you’re always in control."
+                }, void 0, false, {
+                    fileName: "[project]/src/components/About.tsx",
+                    lineNumber: 56,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "text-base text-gray-600 text-center",
+                    children: "Our mission is to ensure you never miss a critical weather update, helping you make safer and smarter decisions every day."
+                }, void 0, false, {
+                    fileName: "[project]/src/components/About.tsx",
+                    lineNumber: 59,
+                    columnNumber: 17
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/About.tsx",
+            lineNumber: 34,
+            columnNumber: 13
+        }, this)
+    }, void 0, false, {
+        fileName: "[project]/src/components/About.tsx",
+        lineNumber: 33,
+        columnNumber: 9
+    }, this);
+};
+_s(About, "CFHF6kJJZYIo85zEsC1mJXbM7UU=");
+_c = About;
+const __TURBOPACK__default__export__ = About;
+var _c;
+__turbopack_context__.k.register(_c, "About");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/src/lib/api.ts [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+// lib/api.ts
+// Frontend API service to communicate with the backend
+__turbopack_context__.s({
+    "api": (()=>api)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+const API_BASE_URL = ("TURBOPACK compile-time value", "http://localhost:5001") || 'http://localhost:5001';
+class ApiService {
+    async request(endpoint, options = {}) {
+        try {
+            const url = `${API_BASE_URL}${endpoint}`;
+            const response = await fetch(url, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                ...options
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                return {
+                    success: false,
+                    error: data.error || data.message || `HTTP ${response.status}`,
+                    errors: data.errors
+                };
+            }
+            return {
+                success: true,
+                data: data.subscription || data.data || data,
+                message: data.message
+            };
+        } catch (error) {
+            return {
+                success: false,
+                error: error instanceof Error ? error.message : 'Network error'
+            };
+        }
+    }
+    // Create a new subscription
+    async createSubscription(subscriptionData) {
+        // Transform the data to match backend expectations
+        const transformedData = {
+            location: {
+                city: subscriptionData.location
+            },
+            alertType: subscriptionData.alertType,
+            email: subscriptionData.email,
+            phone: subscriptionData.phone || '' // backend expects 'phone' field
+        };
+        return this.request('/subscribe', {
+            method: 'POST',
+            body: JSON.stringify(transformedData)
+        });
+    }
+    // Get server status
+    async getServerStatus() {
+        return this.request('/status');
+    }
+    // Get all subscribers
+    async getSubscribers() {
+        return this.request('/subscribers');
+    }
+    // Test weather API
+    async testWeatherAPI() {
+        return this.request('/api/weather/test');
+    }
+    // Get weather by city
+    async getWeatherByCity(city) {
+        return this.request(`/api/weather/city/${encodeURIComponent(city)}`);
+    }
+    // Detect weather events by city
+    async detectEventsByCity(city) {
+        return this.request(`/api/events/detect/${encodeURIComponent(city)}`);
+    }
+    // Delete subscription
+    async deleteSubscription(id) {
+        return this.request(`/api/subscription/${id}`, {
+            method: 'DELETE'
+        });
+    }
+    // Unsubscribe using ID
+    async unsubscribe(id) {
+        return this.request(`/unsubscribe/${id}`, {
+            method: 'DELETE'
+        });
+    }
+}
+const api = new ApiService();
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/src/components/SubscriptionForm.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/api.ts [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+;
+const SubscriptionForm = ({ onSuccess })=>{
+    _s();
+    const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        email: '',
+        phone: '',
+        location: {
+            city: '',
+            country: 'US'
+        },
+        alertTypes: [],
+        notificationMethods: [],
+        frequency: 'once'
+    });
+    const [isSubmitting, setIsSubmitting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const alertTypeOptions = [
+        {
+            value: 'rain',
+            label: '🌧️ Rain',
+            description: 'Get notified about rain conditions'
+        },
+        {
+            value: 'heat',
+            label: '🌡️ Heat',
+            description: 'High temperature warnings'
+        },
+        {
+            value: 'storm',
+            label: '⛈️ Storm',
+            description: 'Thunderstorm and severe weather alerts'
+        },
+        {
+            value: 'snow',
+            label: '❄️ Snow',
+            description: 'Snow and winter weather alerts'
+        },
+        {
+            value: 'wind',
+            label: '💨 Wind',
+            description: 'High wind speed warnings'
+        }
+    ];
+    const handleInputChange = (e)=>{
+        const { name, value } = e.target;
+        if (name.includes('.')) {
+            const [parent, child] = name.split('.');
+            setFormData((prev)=>({
+                    ...prev,
+                    [parent]: {
+                        ...prev[parent],
+                        [child]: value
+                    }
+                }));
+        } else {
+            setFormData((prev)=>({
+                    ...prev,
+                    [name]: value
+                }));
+        }
+    };
+    const handleCheckboxChange = (e, field)=>{
+        const { value, checked } = e.target;
+        setFormData((prev)=>({
+                ...prev,
+                [field]: checked ? [
+                    ...prev[field],
+                    value
+                ] : prev[field].filter((item)=>item !== value)
+            }));
+    };
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        setIsSubmitting(true);
+        setMessage(null);
+        // Validation
+        if (!formData.email || !formData.phone || !formData.location.city) {
+            setMessage({
+                type: 'error',
+                text: 'Please fill in all required fields'
+            });
+            setIsSubmitting(false);
+            return;
+        }
+        if (formData.alertTypes.length === 0) {
+            setMessage({
+                type: 'error',
+                text: 'Please select at least one alert type'
+            });
+            setIsSubmitting(false);
+            return;
+        }
+        if (formData.notificationMethods.length === 0) {
+            setMessage({
+                type: 'error',
+                text: 'Please select at least one notification method'
+            });
+            setIsSubmitting(false);
+            return;
+        }
+        try {
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].createSubscription(formData);
+            if (response.success) {
+                setMessage({
+                    type: 'success',
+                    text: 'Successfully subscribed to weather alerts! You will receive notifications based on your preferences.'
+                });
+                // Reset form
+                setFormData({
+                    email: '',
+                    phone: '',
+                    location: {
+                        city: '',
+                        country: 'US'
+                    },
+                    alertTypes: [],
+                    notificationMethods: [],
+                    frequency: 'once'
+                });
+                onSuccess?.();
+            } else {
+                setMessage({
+                    type: 'error',
+                    text: response.errors?.join(', ') || response.error || 'Failed to create subscription'
+                });
+            }
+        } catch (error) {
+            setMessage({
+                type: 'error',
+                text: 'Network error. Please try again.'
+            });
+        } finally{
+            setIsSubmitting(false);
+        }
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                className: "text-2xl font-bold text-gray-900 mb-6 text-center",
+                children: "Subscribe to Weather Alerts"
+            }, void 0, false, {
+                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                lineNumber: 122,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                onSubmit: handleSubmit,
+                className: "space-y-6",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-lg font-semibold text-gray-800",
+                                children: "Contact Information"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 129,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        htmlFor: "email",
+                                        className: "block text-sm font-medium text-gray-700 mb-1",
+                                        children: "Email Address *"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 132,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "email",
+                                        id: "email",
+                                        name: "email",
+                                        value: formData.email,
+                                        onChange: handleInputChange,
+                                        required: true,
+                                        className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                        placeholder: "your.email@example.com"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 135,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 131,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        htmlFor: "phone",
+                                        className: "block text-sm font-medium text-gray-700 mb-1",
+                                        children: "Phone Number *"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 148,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "tel",
+                                        id: "phone",
+                                        name: "phone",
+                                        value: formData.phone,
+                                        onChange: handleInputChange,
+                                        required: true,
+                                        className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                        placeholder: "+1234567890"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 151,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 147,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 128,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-lg font-semibold text-gray-800",
+                                children: "Location"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 166,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                htmlFor: "location.city",
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "City *"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 170,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "text",
+                                                id: "location.city",
+                                                name: "location.city",
+                                                value: formData.location.city,
+                                                onChange: handleInputChange,
+                                                required: true,
+                                                className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                                placeholder: "Boston"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 173,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 169,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                htmlFor: "location.country",
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "Country"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 186,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "text",
+                                                id: "location.country",
+                                                name: "location.country",
+                                                value: formData.location.country,
+                                                onChange: handleInputChange,
+                                                className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                                placeholder: "US"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 189,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 185,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 168,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 165,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-lg font-semibold text-gray-800",
+                                children: "Alert Types *"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 204,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "grid grid-cols-1 md:grid-cols-2 gap-3",
+                                children: alertTypeOptions.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "flex items-start space-x-3 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "checkbox",
+                                                value: option.value,
+                                                checked: formData.alertTypes.includes(option.value),
+                                                onChange: (e)=>handleCheckboxChange(e, 'alertTypes'),
+                                                className: "mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 208,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "font-medium text-gray-900",
+                                                        children: option.label
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                        lineNumber: 216,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "text-sm text-gray-600",
+                                                        children: option.description
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                        lineNumber: 217,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 215,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, option.value, true, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 207,
+                                        columnNumber: 15
+                                    }, this))
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 205,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 203,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-lg font-semibold text-gray-800",
+                                children: "Notification Methods *"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 226,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "space-y-2",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "flex items-center space-x-3",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "checkbox",
+                                                value: "email",
+                                                checked: formData.notificationMethods.includes('email'),
+                                                onChange: (e)=>handleCheckboxChange(e, 'notificationMethods'),
+                                                className: "rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 229,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-gray-700",
+                                                children: "📧 Email notifications"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 236,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 228,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "flex items-center space-x-3",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "checkbox",
+                                                value: "sms",
+                                                checked: formData.notificationMethods.includes('sms'),
+                                                onChange: (e)=>handleCheckboxChange(e, 'notificationMethods'),
+                                                className: "rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 239,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-gray-700",
+                                                children: "📱 SMS notifications"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                                lineNumber: 246,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 238,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 227,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 225,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-lg font-semibold text-gray-800",
+                                children: "Alert Frequency"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 253,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                name: "frequency",
+                                value: formData.frequency,
+                                onChange: handleInputChange,
+                                className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: "once",
+                                        children: "One-time alerts"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 260,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: "daily",
+                                        children: "Daily alerts"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 261,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: "weekly",
+                                        children: "Weekly alerts"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                        lineNumber: 262,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                                lineNumber: 254,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 252,
+                        columnNumber: 9
+                    }, this),
+                    message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: `p-4 rounded-md ${message.type === 'success' ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800'}`,
+                        children: message.text
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 268,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        type: "submit",
+                        disabled: isSubmitting,
+                        className: `w-full py-3 px-4 rounded-md font-medium text-white transition-colors ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'}`,
+                        children: isSubmitting ? 'Creating Subscription...' : 'Subscribe to Weather Alerts'
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/SubscriptionForm.tsx",
+                        lineNumber: 278,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                lineNumber: 126,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "mt-6 text-center text-sm text-gray-600",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    children: "By subscribing, you agree to receive weather alerts. You can unsubscribe at any time using the link in our notifications."
+                }, void 0, false, {
+                    fileName: "[project]/src/components/SubscriptionForm.tsx",
+                    lineNumber: 292,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/components/SubscriptionForm.tsx",
+                lineNumber: 291,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/components/SubscriptionForm.tsx",
+        lineNumber: 121,
+        columnNumber: 5
+    }, this);
+};
+_s(SubscriptionForm, "/L82V58OqKUKFvGFmwqf78XSsgg=");
+_c = SubscriptionForm;
+const __TURBOPACK__default__export__ = SubscriptionForm;
+var _c;
+__turbopack_context__.k.register(_c, "SubscriptionForm");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/node_modules/next/dist/compiled/react/cjs/react-jsx-dev-runtime.development.js [app-client] (ecmascript)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+/**
+ * @license React
+ * react-jsx-dev-runtime.development.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+"use strict";
+"production" !== ("TURBOPACK compile-time value", "development") && function() {
+    function getComponentNameFromType(type) {
+        if (null == type) return null;
+        if ("function" === typeof type) return type.$$typeof === REACT_CLIENT_REFERENCE ? null : type.displayName || type.name || null;
+        if ("string" === typeof type) return type;
+        switch(type){
+            case REACT_FRAGMENT_TYPE:
+                return "Fragment";
+            case REACT_PROFILER_TYPE:
+                return "Profiler";
+            case REACT_STRICT_MODE_TYPE:
+                return "StrictMode";
+            case REACT_SUSPENSE_TYPE:
+                return "Suspense";
+            case REACT_SUSPENSE_LIST_TYPE:
+                return "SuspenseList";
+            case REACT_ACTIVITY_TYPE:
+                return "Activity";
+        }
+        if ("object" === typeof type) switch("number" === typeof type.tag && console.error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), type.$$typeof){
+            case REACT_PORTAL_TYPE:
+                return "Portal";
+            case REACT_CONTEXT_TYPE:
+                return (type.displayName || "Context") + ".Provider";
+            case REACT_CONSUMER_TYPE:
+                return (type._context.displayName || "Context") + ".Consumer";
+            case REACT_FORWARD_REF_TYPE:
+                var innerType = type.render;
+                type = type.displayName;
+                type || (type = innerType.displayName || innerType.name || "", type = "" !== type ? "ForwardRef(" + type + ")" : "ForwardRef");
+                return type;
+            case REACT_MEMO_TYPE:
+                return innerType = type.displayName || null, null !== innerType ? innerType : getComponentNameFromType(type.type) || "Memo";
+            case REACT_LAZY_TYPE:
+                innerType = type._payload;
+                type = type._init;
+                try {
+                    return getComponentNameFromType(type(innerType));
+                } catch (x) {}
+        }
+        return null;
+    }
+    function testStringCoercion(value) {
+        return "" + value;
+    }
+    function checkKeyStringCoercion(value) {
+        try {
+            testStringCoercion(value);
+            var JSCompiler_inline_result = !1;
+        } catch (e) {
+            JSCompiler_inline_result = !0;
+        }
+        if (JSCompiler_inline_result) {
+            JSCompiler_inline_result = console;
+            var JSCompiler_temp_const = JSCompiler_inline_result.error;
+            var JSCompiler_inline_result$jscomp$0 = "function" === typeof Symbol && Symbol.toStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+            JSCompiler_temp_const.call(JSCompiler_inline_result, "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.", JSCompiler_inline_result$jscomp$0);
+            return testStringCoercion(value);
+        }
+    }
+    function getTaskName(type) {
+        if (type === REACT_FRAGMENT_TYPE) return "<>";
+        if ("object" === typeof type && null !== type && type.$$typeof === REACT_LAZY_TYPE) return "<...>";
+        try {
+            var name = getComponentNameFromType(type);
+            return name ? "<" + name + ">" : "<...>";
+        } catch (x) {
+            return "<...>";
+        }
+    }
+    function getOwner() {
+        var dispatcher = ReactSharedInternals.A;
+        return null === dispatcher ? null : dispatcher.getOwner();
+    }
+    function UnknownOwner() {
+        return Error("react-stack-top-frame");
+    }
+    function hasValidKey(config) {
+        if (hasOwnProperty.call(config, "key")) {
+            var getter = Object.getOwnPropertyDescriptor(config, "key").get;
+            if (getter && getter.isReactWarning) return !1;
+        }
+        return void 0 !== config.key;
+    }
+    function defineKeyPropWarningGetter(props, displayName) {
+        function warnAboutAccessingKey() {
+            specialPropKeyWarningShown || (specialPropKeyWarningShown = !0, console.error("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)", displayName));
+        }
+        warnAboutAccessingKey.isReactWarning = !0;
+        Object.defineProperty(props, "key", {
+            get: warnAboutAccessingKey,
+            configurable: !0
+        });
+    }
+    function elementRefGetterWithDeprecationWarning() {
+        var componentName = getComponentNameFromType(this.type);
+        didWarnAboutElementRef[componentName] || (didWarnAboutElementRef[componentName] = !0, console.error("Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."));
+        componentName = this.props.ref;
+        return void 0 !== componentName ? componentName : null;
+    }
+    function ReactElement(type, key, self, source, owner, props, debugStack, debugTask) {
+        self = props.ref;
+        type = {
+            $$typeof: REACT_ELEMENT_TYPE,
+            type: type,
+            key: key,
+            props: props,
+            _owner: owner
+        };
+        null !== (void 0 !== self ? self : null) ? Object.defineProperty(type, "ref", {
+            enumerable: !1,
+            get: elementRefGetterWithDeprecationWarning
+        }) : Object.defineProperty(type, "ref", {
+            enumerable: !1,
+            value: null
+        });
+        type._store = {};
+        Object.defineProperty(type._store, "validated", {
+            configurable: !1,
+            enumerable: !1,
+            writable: !0,
+            value: 0
+        });
+        Object.defineProperty(type, "_debugInfo", {
+            configurable: !1,
+            enumerable: !1,
+            writable: !0,
+            value: null
+        });
+        Object.defineProperty(type, "_debugStack", {
+            configurable: !1,
+            enumerable: !1,
+            writable: !0,
+            value: debugStack
+        });
+        Object.defineProperty(type, "_debugTask", {
+            configurable: !1,
+            enumerable: !1,
+            writable: !0,
+            value: debugTask
+        });
+        Object.freeze && (Object.freeze(type.props), Object.freeze(type));
+        return type;
+    }
+    function jsxDEVImpl(type, config, maybeKey, isStaticChildren, source, self, debugStack, debugTask) {
+        var children = config.children;
+        if (void 0 !== children) if (isStaticChildren) if (isArrayImpl(children)) {
+            for(isStaticChildren = 0; isStaticChildren < children.length; isStaticChildren++)validateChildKeys(children[isStaticChildren]);
+            Object.freeze && Object.freeze(children);
+        } else console.error("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
+        else validateChildKeys(children);
+        if (hasOwnProperty.call(config, "key")) {
+            children = getComponentNameFromType(type);
+            var keys = Object.keys(config).filter(function(k) {
+                return "key" !== k;
+            });
+            isStaticChildren = 0 < keys.length ? "{key: someKey, " + keys.join(": ..., ") + ": ...}" : "{key: someKey}";
+            didWarnAboutKeySpread[children + isStaticChildren] || (keys = 0 < keys.length ? "{" + keys.join(": ..., ") + ": ...}" : "{}", console.error('A props object containing a "key" prop is being spread into JSX:\n  let props = %s;\n  <%s {...props} />\nReact keys must be passed directly to JSX without using spread:\n  let props = %s;\n  <%s key={someKey} {...props} />', isStaticChildren, children, keys, children), didWarnAboutKeySpread[children + isStaticChildren] = !0);
+        }
+        children = null;
+        void 0 !== maybeKey && (checkKeyStringCoercion(maybeKey), children = "" + maybeKey);
+        hasValidKey(config) && (checkKeyStringCoercion(config.key), children = "" + config.key);
+        if ("key" in config) {
+            maybeKey = {};
+            for(var propName in config)"key" !== propName && (maybeKey[propName] = config[propName]);
+        } else maybeKey = config;
+        children && defineKeyPropWarningGetter(maybeKey, "function" === typeof type ? type.displayName || type.name || "Unknown" : type);
+        return ReactElement(type, children, self, source, getOwner(), maybeKey, debugStack, debugTask);
+    }
+    function validateChildKeys(node) {
+        "object" === typeof node && null !== node && node.$$typeof === REACT_ELEMENT_TYPE && node._store && (node._store.validated = 1);
+    }
+    var React = __turbopack_context__.r("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler");
+    Symbol.for("react.provider");
+    var REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), ReactSharedInternals = React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
+        return null;
+    };
+    React = {
+        "react-stack-bottom-frame": function(callStackForError) {
+            return callStackForError();
+        }
+    };
+    var specialPropKeyWarningShown;
+    var didWarnAboutElementRef = {};
+    var unknownOwnerDebugStack = React["react-stack-bottom-frame"].bind(React, UnknownOwner)();
+    var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
+    var didWarnAboutKeySpread = {};
+    exports.Fragment = REACT_FRAGMENT_TYPE;
+    exports.jsxDEV = function(type, config, maybeKey, isStaticChildren, source, self) {
+        var trackActualOwner = 1e4 > ReactSharedInternals.recentlyCreatedOwnerStacks++;
+        return jsxDEVImpl(type, config, maybeKey, isStaticChildren, source, self, trackActualOwner ? Error("react-stack-top-frame") : unknownOwnerDebugStack, trackActualOwner ? createTask(getTaskName(type)) : unknownOwnerDebugTask);
+    };
+}();
+}}),
+"[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+'use strict';
+if ("TURBOPACK compile-time falsy", 0) {
+    "TURBOPACK unreachable";
+} else {
+    module.exports = __turbopack_context__.r("[project]/node_modules/next/dist/compiled/react/cjs/react-jsx-dev-runtime.development.js [app-client] (ecmascript)");
+}
+}}),
+"[project]/node_modules/next/dist/compiled/client-only/index.js [app-client] (ecmascript)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+}}),
+"[project]/node_modules/styled-jsx/dist/index/index.js [app-client] (ecmascript)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+__turbopack_context__.r("[project]/node_modules/next/dist/compiled/client-only/index.js [app-client] (ecmascript)");
+var React = __turbopack_context__.r("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+function _interopDefaultLegacy(e) {
+    return e && typeof e === 'object' && 'default' in e ? e : {
+        'default': e
+    };
+}
+var React__default = /*#__PURE__*/ _interopDefaultLegacy(React);
+/*
+Based on Glamor's sheet
+https://github.com/threepointone/glamor/blob/667b480d31b3721a905021b26e1290ce92ca2879/src/sheet.js
+*/ function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+    }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+var isProd = typeof __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"] !== "undefined" && __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env && ("TURBOPACK compile-time value", "development") === "production";
+var isString = function(o) {
+    return Object.prototype.toString.call(o) === "[object String]";
+};
+var StyleSheet = /*#__PURE__*/ function() {
+    function StyleSheet(param) {
+        var ref = param === void 0 ? {} : param, _name = ref.name, name = _name === void 0 ? "stylesheet" : _name, _optimizeForSpeed = ref.optimizeForSpeed, optimizeForSpeed = _optimizeForSpeed === void 0 ? isProd : _optimizeForSpeed;
+        invariant$1(isString(name), "`name` must be a string");
+        this._name = name;
+        this._deletedRulePlaceholder = "#" + name + "-deleted-rule____{}";
+        invariant$1(typeof optimizeForSpeed === "boolean", "`optimizeForSpeed` must be a boolean");
+        this._optimizeForSpeed = optimizeForSpeed;
+        this._serverSheet = undefined;
+        this._tags = [];
+        this._injected = false;
+        this._rulesCount = 0;
+        var node = typeof window !== "undefined" && document.querySelector('meta[property="csp-nonce"]');
+        this._nonce = node ? node.getAttribute("content") : null;
+    }
+    var _proto = StyleSheet.prototype;
+    _proto.setOptimizeForSpeed = function setOptimizeForSpeed(bool) {
+        invariant$1(typeof bool === "boolean", "`setOptimizeForSpeed` accepts a boolean");
+        invariant$1(this._rulesCount === 0, "optimizeForSpeed cannot be when rules have already been inserted");
+        this.flush();
+        this._optimizeForSpeed = bool;
+        this.inject();
+    };
+    _proto.isOptimizeForSpeed = function isOptimizeForSpeed() {
+        return this._optimizeForSpeed;
+    };
+    _proto.inject = function inject() {
+        var _this = this;
+        invariant$1(!this._injected, "sheet already injected");
+        this._injected = true;
+        if (typeof window !== "undefined" && this._optimizeForSpeed) {
+            this._tags[0] = this.makeStyleTag(this._name);
+            this._optimizeForSpeed = "insertRule" in this.getSheet();
+            if (!this._optimizeForSpeed) {
+                if ("TURBOPACK compile-time truthy", 1) {
+                    console.warn("StyleSheet: optimizeForSpeed mode not supported falling back to standard mode.");
+                }
+                this.flush();
+                this._injected = true;
+            }
+            return;
+        }
+        this._serverSheet = {
+            cssRules: [],
+            insertRule: function(rule, index) {
+                if (typeof index === "number") {
+                    _this._serverSheet.cssRules[index] = {
+                        cssText: rule
+                    };
+                } else {
+                    _this._serverSheet.cssRules.push({
+                        cssText: rule
+                    });
+                }
+                return index;
+            },
+            deleteRule: function(index) {
+                _this._serverSheet.cssRules[index] = null;
+            }
+        };
+    };
+    _proto.getSheetForTag = function getSheetForTag(tag) {
+        if (tag.sheet) {
+            return tag.sheet;
+        }
+        // this weirdness brought to you by firefox
+        for(var i = 0; i < document.styleSheets.length; i++){
+            if (document.styleSheets[i].ownerNode === tag) {
+                return document.styleSheets[i];
+            }
+        }
+    };
+    _proto.getSheet = function getSheet() {
+        return this.getSheetForTag(this._tags[this._tags.length - 1]);
+    };
+    _proto.insertRule = function insertRule(rule, index) {
+        invariant$1(isString(rule), "`insertRule` accepts only strings");
+        if (typeof window === "undefined") {
+            if (typeof index !== "number") {
+                index = this._serverSheet.cssRules.length;
+            }
+            this._serverSheet.insertRule(rule, index);
+            return this._rulesCount++;
+        }
+        if (this._optimizeForSpeed) {
+            var sheet = this.getSheet();
+            if (typeof index !== "number") {
+                index = sheet.cssRules.length;
+            }
+            // this weirdness for perf, and chrome's weird bug
+            // https://stackoverflow.com/questions/20007992/chrome-suddenly-stopped-accepting-insertrule
+            try {
+                sheet.insertRule(rule, index);
+            } catch (error) {
+                if ("TURBOPACK compile-time truthy", 1) {
+                    console.warn("StyleSheet: illegal rule: \n\n" + rule + "\n\nSee https://stackoverflow.com/q/20007992 for more info");
+                }
+                return -1;
+            }
+        } else {
+            var insertionPoint = this._tags[index];
+            this._tags.push(this.makeStyleTag(this._name, rule, insertionPoint));
+        }
+        return this._rulesCount++;
+    };
+    _proto.replaceRule = function replaceRule(index, rule) {
+        if (this._optimizeForSpeed || typeof window === "undefined") {
+            var sheet = typeof window !== "undefined" ? this.getSheet() : this._serverSheet;
+            if (!rule.trim()) {
+                rule = this._deletedRulePlaceholder;
+            }
+            if (!sheet.cssRules[index]) {
+                // @TBD Should we throw an error?
+                return index;
+            }
+            sheet.deleteRule(index);
+            try {
+                sheet.insertRule(rule, index);
+            } catch (error) {
+                if ("TURBOPACK compile-time truthy", 1) {
+                    console.warn("StyleSheet: illegal rule: \n\n" + rule + "\n\nSee https://stackoverflow.com/q/20007992 for more info");
+                }
+                // In order to preserve the indices we insert a deleteRulePlaceholder
+                sheet.insertRule(this._deletedRulePlaceholder, index);
+            }
+        } else {
+            var tag = this._tags[index];
+            invariant$1(tag, "old rule at index `" + index + "` not found");
+            tag.textContent = rule;
+        }
+        return index;
+    };
+    _proto.deleteRule = function deleteRule(index) {
+        if (typeof window === "undefined") {
+            this._serverSheet.deleteRule(index);
+            return;
+        }
+        if (this._optimizeForSpeed) {
+            this.replaceRule(index, "");
+        } else {
+            var tag = this._tags[index];
+            invariant$1(tag, "rule at index `" + index + "` not found");
+            tag.parentNode.removeChild(tag);
+            this._tags[index] = null;
+        }
+    };
+    _proto.flush = function flush() {
+        this._injected = false;
+        this._rulesCount = 0;
+        if (typeof window !== "undefined") {
+            this._tags.forEach(function(tag) {
+                return tag && tag.parentNode.removeChild(tag);
+            });
+            this._tags = [];
+        } else {
+            // simpler on server
+            this._serverSheet.cssRules = [];
+        }
+    };
+    _proto.cssRules = function cssRules() {
+        var _this = this;
+        if (typeof window === "undefined") {
+            return this._serverSheet.cssRules;
+        }
+        return this._tags.reduce(function(rules, tag) {
+            if (tag) {
+                rules = rules.concat(Array.prototype.map.call(_this.getSheetForTag(tag).cssRules, function(rule) {
+                    return rule.cssText === _this._deletedRulePlaceholder ? null : rule;
+                }));
+            } else {
+                rules.push(null);
+            }
+            return rules;
+        }, []);
+    };
+    _proto.makeStyleTag = function makeStyleTag(name, cssString, relativeToTag) {
+        if (cssString) {
+            invariant$1(isString(cssString), "makeStyleTag accepts only strings as second parameter");
+        }
+        var tag = document.createElement("style");
+        if (this._nonce) tag.setAttribute("nonce", this._nonce);
+        tag.type = "text/css";
+        tag.setAttribute("data-" + name, "");
+        if (cssString) {
+            tag.appendChild(document.createTextNode(cssString));
+        }
+        var head = document.head || document.getElementsByTagName("head")[0];
+        if (relativeToTag) {
+            head.insertBefore(tag, relativeToTag);
+        } else {
+            head.appendChild(tag);
+        }
+        return tag;
+    };
+    _createClass(StyleSheet, [
+        {
+            key: "length",
+            get: function get() {
+                return this._rulesCount;
+            }
+        }
+    ]);
+    return StyleSheet;
+}();
+function invariant$1(condition, message) {
+    if (!condition) {
+        throw new Error("StyleSheet: " + message + ".");
+    }
+}
+function hash(str) {
+    var _$hash = 5381, i = str.length;
+    while(i){
+        _$hash = _$hash * 33 ^ str.charCodeAt(--i);
+    }
+    /* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
+   * integers. Since we want the results to be always positive, convert the
+   * signed int to an unsigned by doing an unsigned bitshift. */ return _$hash >>> 0;
+}
+var stringHash = hash;
+var sanitize = function(rule) {
+    return rule.replace(/\/style/gi, "\\/style");
+};
+var cache = {};
+/**
+ * computeId
+ *
+ * Compute and memoize a jsx id from a basedId and optionally props.
+ */ function computeId(baseId, props) {
+    if (!props) {
+        return "jsx-" + baseId;
+    }
+    var propsToString = String(props);
+    var key = baseId + propsToString;
+    if (!cache[key]) {
+        cache[key] = "jsx-" + stringHash(baseId + "-" + propsToString);
+    }
+    return cache[key];
+}
+/**
+ * computeSelector
+ *
+ * Compute and memoize dynamic selectors.
+ */ function computeSelector(id, css) {
+    var selectoPlaceholderRegexp = /__jsx-style-dynamic-selector/g;
+    // Sanitize SSR-ed CSS.
+    // Client side code doesn't need to be sanitized since we use
+    // document.createTextNode (dev) and the CSSOM api sheet.insertRule (prod).
+    if (typeof window === "undefined") {
+        css = sanitize(css);
+    }
+    var idcss = id + css;
+    if (!cache[idcss]) {
+        cache[idcss] = css.replace(selectoPlaceholderRegexp, id);
+    }
+    return cache[idcss];
+}
+function mapRulesToStyle(cssRules, options) {
+    if (options === void 0) options = {};
+    return cssRules.map(function(args) {
+        var id = args[0];
+        var css = args[1];
+        return /*#__PURE__*/ React__default["default"].createElement("style", {
+            id: "__" + id,
+            // Avoid warnings upon render with a key
+            key: "__" + id,
+            nonce: options.nonce ? options.nonce : undefined,
+            dangerouslySetInnerHTML: {
+                __html: css
+            }
+        });
+    });
+}
+var StyleSheetRegistry = /*#__PURE__*/ function() {
+    function StyleSheetRegistry(param) {
+        var ref = param === void 0 ? {} : param, _styleSheet = ref.styleSheet, styleSheet = _styleSheet === void 0 ? null : _styleSheet, _optimizeForSpeed = ref.optimizeForSpeed, optimizeForSpeed = _optimizeForSpeed === void 0 ? false : _optimizeForSpeed;
+        this._sheet = styleSheet || new StyleSheet({
+            name: "styled-jsx",
+            optimizeForSpeed: optimizeForSpeed
+        });
+        this._sheet.inject();
+        if (styleSheet && typeof optimizeForSpeed === "boolean") {
+            this._sheet.setOptimizeForSpeed(optimizeForSpeed);
+            this._optimizeForSpeed = this._sheet.isOptimizeForSpeed();
+        }
+        this._fromServer = undefined;
+        this._indices = {};
+        this._instancesCounts = {};
+    }
+    var _proto = StyleSheetRegistry.prototype;
+    _proto.add = function add(props) {
+        var _this = this;
+        if (undefined === this._optimizeForSpeed) {
+            this._optimizeForSpeed = Array.isArray(props.children);
+            this._sheet.setOptimizeForSpeed(this._optimizeForSpeed);
+            this._optimizeForSpeed = this._sheet.isOptimizeForSpeed();
+        }
+        if (typeof window !== "undefined" && !this._fromServer) {
+            this._fromServer = this.selectFromServer();
+            this._instancesCounts = Object.keys(this._fromServer).reduce(function(acc, tagName) {
+                acc[tagName] = 0;
+                return acc;
+            }, {});
+        }
+        var ref = this.getIdAndRules(props), styleId = ref.styleId, rules = ref.rules;
+        // Deduping: just increase the instances count.
+        if (styleId in this._instancesCounts) {
+            this._instancesCounts[styleId] += 1;
+            return;
+        }
+        var indices = rules.map(function(rule) {
+            return _this._sheet.insertRule(rule);
+        }) // Filter out invalid rules
+        .filter(function(index) {
+            return index !== -1;
+        });
+        this._indices[styleId] = indices;
+        this._instancesCounts[styleId] = 1;
+    };
+    _proto.remove = function remove(props) {
+        var _this = this;
+        var styleId = this.getIdAndRules(props).styleId;
+        invariant(styleId in this._instancesCounts, "styleId: `" + styleId + "` not found");
+        this._instancesCounts[styleId] -= 1;
+        if (this._instancesCounts[styleId] < 1) {
+            var tagFromServer = this._fromServer && this._fromServer[styleId];
+            if (tagFromServer) {
+                tagFromServer.parentNode.removeChild(tagFromServer);
+                delete this._fromServer[styleId];
+            } else {
+                this._indices[styleId].forEach(function(index) {
+                    return _this._sheet.deleteRule(index);
+                });
+                delete this._indices[styleId];
+            }
+            delete this._instancesCounts[styleId];
+        }
+    };
+    _proto.update = function update(props, nextProps) {
+        this.add(nextProps);
+        this.remove(props);
+    };
+    _proto.flush = function flush() {
+        this._sheet.flush();
+        this._sheet.inject();
+        this._fromServer = undefined;
+        this._indices = {};
+        this._instancesCounts = {};
+    };
+    _proto.cssRules = function cssRules() {
+        var _this = this;
+        var fromServer = this._fromServer ? Object.keys(this._fromServer).map(function(styleId) {
+            return [
+                styleId,
+                _this._fromServer[styleId]
+            ];
+        }) : [];
+        var cssRules = this._sheet.cssRules();
+        return fromServer.concat(Object.keys(this._indices).map(function(styleId) {
+            return [
+                styleId,
+                _this._indices[styleId].map(function(index) {
+                    return cssRules[index].cssText;
+                }).join(_this._optimizeForSpeed ? "" : "\n")
+            ];
+        }) // filter out empty rules
+        .filter(function(rule) {
+            return Boolean(rule[1]);
+        }));
+    };
+    _proto.styles = function styles(options) {
+        return mapRulesToStyle(this.cssRules(), options);
+    };
+    _proto.getIdAndRules = function getIdAndRules(props) {
+        var css = props.children, dynamic = props.dynamic, id = props.id;
+        if (dynamic) {
+            var styleId = computeId(id, dynamic);
+            return {
+                styleId: styleId,
+                rules: Array.isArray(css) ? css.map(function(rule) {
+                    return computeSelector(styleId, rule);
+                }) : [
+                    computeSelector(styleId, css)
+                ]
+            };
+        }
+        return {
+            styleId: computeId(id),
+            rules: Array.isArray(css) ? css : [
+                css
+            ]
+        };
+    };
+    /**
+   * selectFromServer
+   *
+   * Collects style tags from the document with id __jsx-XXX
+   */ _proto.selectFromServer = function selectFromServer() {
+        var elements = Array.prototype.slice.call(document.querySelectorAll('[id^="__jsx-"]'));
+        return elements.reduce(function(acc, element) {
+            var id = element.id.slice(2);
+            acc[id] = element;
+            return acc;
+        }, {});
+    };
+    return StyleSheetRegistry;
+}();
+function invariant(condition, message) {
+    if (!condition) {
+        throw new Error("StyleSheetRegistry: " + message + ".");
+    }
+}
+var StyleSheetContext = /*#__PURE__*/ React.createContext(null);
+StyleSheetContext.displayName = "StyleSheetContext";
+function createStyleRegistry() {
+    return new StyleSheetRegistry();
+}
+function StyleRegistry(param) {
+    var configuredRegistry = param.registry, children = param.children;
+    var rootRegistry = React.useContext(StyleSheetContext);
+    var ref = React.useState({
+        "StyleRegistry.useState[ref]": function() {
+            return rootRegistry || configuredRegistry || createStyleRegistry();
+        }
+    }["StyleRegistry.useState[ref]"]), registry = ref[0];
+    return /*#__PURE__*/ React__default["default"].createElement(StyleSheetContext.Provider, {
+        value: registry
+    }, children);
+}
+function useStyleRegistry() {
+    return React.useContext(StyleSheetContext);
+}
+// Opt-into the new `useInsertionEffect` API in React 18, fallback to `useLayoutEffect`.
+// https://github.com/reactwg/react-18/discussions/110
+var useInsertionEffect = React__default["default"].useInsertionEffect || React__default["default"].useLayoutEffect;
+var defaultRegistry = typeof window !== "undefined" ? createStyleRegistry() : undefined;
+function JSXStyle(props) {
+    var registry = defaultRegistry ? defaultRegistry : useStyleRegistry();
+    // If `registry` does not exist, we do nothing here.
+    if (!registry) {
+        return null;
+    }
+    if (typeof window === "undefined") {
+        registry.add(props);
+        return null;
+    }
+    useInsertionEffect({
+        "JSXStyle.useInsertionEffect": function() {
+            registry.add(props);
+            return ({
+                "JSXStyle.useInsertionEffect": function() {
+                    registry.remove(props);
+                }
+            })["JSXStyle.useInsertionEffect"];
+        // props.children can be string[], will be striped since id is identical
+        }
+    }["JSXStyle.useInsertionEffect"], [
+        props.id,
+        String(props.dynamic)
+    ]);
+    return null;
+}
+JSXStyle.dynamic = function(info) {
+    return info.map(function(tagInfo) {
+        var baseId = tagInfo[0];
+        var props = tagInfo[1];
+        return computeId(baseId, props);
+    }).join(" ");
+};
+exports.StyleRegistry = StyleRegistry;
+exports.createStyleRegistry = createStyleRegistry;
+exports.style = JSXStyle;
+exports.useStyleRegistry = useStyleRegistry;
+}}),
+"[project]/node_modules/styled-jsx/style.js [app-client] (ecmascript)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+module.exports = __turbopack_context__.r("[project]/node_modules/styled-jsx/dist/index/index.js [app-client] (ecmascript)").style;
+}}),
+}]);
+
+//# sourceMappingURL=_a288cdf2._.js.map
