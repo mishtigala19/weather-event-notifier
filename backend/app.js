@@ -2,6 +2,17 @@ const express = require('express')
 const app = express()
 const cors = require('cors');
 
+// function to validate time zones
+function isValidTimeZone(tz) {
+    try {
+        return Intl.supportedValuesOf
+            ? Intl.supportedValuesOf('timeZone').includes(tz)
+            : !!Intl.DateTimeFormat(undefined, { timeZone: tz });
+    } catch {
+        return false;
+    }
+}
+
 // Middleware
 app.use(cors({
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
@@ -50,6 +61,10 @@ app.post('/subscribe', async (req, res) => {
 
     if (phone && !phoneRegex.test(phone)) {
         errors.push('Invalid phone number');
+    }
+
+    if (!timeZone || typeof timeZone !== 'string' || !isValidTimeZone(timeZone)) {
+        errors.push('Invalid or missing timeZone');
     }
 
     if (errors.length > 0) {

@@ -5,6 +5,7 @@ const weatherService = require('./weatherService');
 const eventDetector = require('./eventDetector');
 const emailService = require('./emailService');
 const smsService = require('./smsService');
+const { getNowInZone, formatTime } = require('../utils/time');
 
 
 class WeatherScheduler {
@@ -19,7 +20,7 @@ class WeatherScheduler {
             console.log('⚠️ Scheduler already running');
             return;
         }
-        
+
         // Every 30 min
         this.mainJob = cron.schedule('*/30 * * * *', async () => {
             console.log(`🕐 [${new Date().toISOString()}] Running scheduled weather check #${++this.jobCount}`);
@@ -37,19 +38,19 @@ class WeatherScheduler {
     async checkAllSubscriptions() {
         try {
             const allSubs = await Subscription.find({ isActive: true });
-    
+
             const now = Date.now();
             const dueSubscriptions = allSubs.filter(sub => {
                 const intervalMs = (sub.checkInterval || 30) * 60 * 1000; // Convert to ms
-    
+
                 if (!sub.lastChecked) return true;
-    
+
                 const lastCheckedTime = new Date(sub.lastChecked).getTime();
                 return now - lastCheckedTime >= intervalMs;
             });
-    
+
             console.log(`📊 Found ${dueSubscriptions.length} subscriptions due for weather check`);
-    
+
             let alertsSent = 0;
             for (const subscription of dueSubscriptions) {
                 try {
@@ -59,7 +60,7 @@ class WeatherScheduler {
                     console.error(`❌ Error checking subscription ${subscription._id}:`, error.message);
                 }
             }
-    
+
             console.log(`✅ Weather check complete: ${alertsSent} alerts sent out of ${dueSubscriptions.length} due subscriptions`);
         } catch (error) {
             console.error('❌ Error in checkAllSubscriptions:', error.message);
@@ -70,7 +71,7 @@ class WeatherScheduler {
     async checkSubscription(subscription) {
         try {
 
-            const { location, alertTypes, timezone, quietHours, alertCooldown, lastNotified } = subscription;
+            const { location, alertTypes, timezone, quietHours, alertCooldown, lastNotified, alertTime } = subscription;
 
             // Skip if in quiet hours
             if (this.isInQuietHours(timezone, quietHours)) {
@@ -98,7 +99,14 @@ class WeatherScheduler {
             const detector = new eventDetector.EventDetector();
             const events = detector.detectEvents(weatherData.data);
 
-            // Find matching alerst
+            // Check for alert time
+            const nowInZone = getNowInZone(timezone);
+            const nowStr = formatTime(nowInZone);
+            if (nowStr !== alertTime) {
+                return false;
+            }
+
+            // Find matching alerts
             const matchingAlerts = events.filter(event =>
                 alertTypes.includes(event.type.toLowerCase())
             );
@@ -121,7 +129,7 @@ class WeatherScheduler {
             await this.updateLastChecked(subscription._id);
             return false;
         }
-        
+
     }
 
     // Send alerts via email/SMS
@@ -166,7 +174,7 @@ class WeatherScheduler {
             }
 
             return result;
-        } catch(error) {
+        } catch (error) {
             console.error('❌ Email sending failure:', error.message);
             throw error;
         }
@@ -196,17 +204,15 @@ class WeatherScheduler {
     isInQuietHours(timezone, quietHours) {
         if (!quietHours || !quietHours.start || !quietHours.end) return false;
 
-        const now = moment().tz(timezone);
-        const currentTime = now.format('HH:mm');
-
+        const nowInZone = getNowInZone(timezone);
+        const currentTime = formatTime(nowInZone);
         const { start, end } = quietHours;
-
-        // Handle overnight quiet hours
         if (start > end) {
-            return currentTime >= start || currentTime <= end; 
+            return currentTime >= start || currentTime <= end;
         } else {
             return currentTime >= start && currentTime <= end;
         }
+
     }
 
     // Check if subscription is still in cooldown period

@@ -85,7 +85,7 @@ const subscriptionSchema = new mongoose.Schema({
     timezone: {
         type: String, 
         default: 'America/New_York',
-        required: false
+        required: true
     },
 
     checkInterval: {

@@ -1,5 +1,5 @@
 // services/alertTrigger.js
-const Subscription = require('../models/subscription');
+const Subscription = require('../models/Subscription');
 const weatherService = require('../../../backend/services/weatherService');
 
 async function checkAlertsAndTrigger() {
