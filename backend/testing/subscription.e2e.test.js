@@ -6,25 +6,19 @@ const request      = require('supertest');
 const mongoose     = require('mongoose');
 const app          = require('../app');
 const Subscription = require('../models/Subscription');
-const MONGO_URI    = process.env.MONGODB_URI;
+const { generateSubscriptionBatch } = require('./testSubscriptionGenerator');
 
-beforeAll(
-  async () => {
-    console.log('Connecting to MongoDB…', MONGO_URI);
-    await mongoose.connect(MONGO_URI, {
-      serverSelectionTimeoutMS: 5000  
-    });
-  },
-  20000
-);
+const MONGO_URI = process.env.MONGODB_URI;
 
-afterAll(
-  async () => {
-    console.log('Closing MongoDB connection');
-    await mongoose.connection.close();
-  },
-  20000
-);
+beforeAll(async () => {
+  console.log('Connecting to MongoDB…', MONGO_URI);
+  await mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 5000 });
+});
+
+afterAll(async () => {
+  console.log('Closing MongoDB connection');
+  await mongoose.connection.close();
+});
 
 beforeEach(async () => {
   await Subscription.deleteMany({});
@@ -38,10 +32,7 @@ describe('POST /subscribe', () => {
       location: {
         city: 'Boston',
         country: 'USA',
-        coordinates: {
-          lat: 42.3601,
-          lon: -71.0589
-        }
+        coordinates: { lat: 42.3601, lon: -71.0589 }
       },
       alertTypes: ['rain'],
       notificationMethods: ['sms'],
@@ -49,18 +40,13 @@ describe('POST /subscribe', () => {
       timezone: 'America/New_York',
       checkInterval: 30,
       alertCooldown: 60,
-      quietHours: {
-        start: '22:00',
-        end: '07:00'
-      }
+      quietHours: { start: '22:00', end: '07:00' }
     };
 
     const response = await request(app)
       .post('/subscribe')
       .send(payload)
       .expect(201);
-
-    console.log('Response:', response.body);
 
     expect(response.body).toHaveProperty('message', 'Subscription saved!');
     expect(response.body.subscription.email).toBe(payload.email);
@@ -74,9 +60,7 @@ describe('POST /subscribe', () => {
     const payload = {
       email: 'not-an-email',
       phone: '+12345678901',
-      location: {
-        city: 'Boston'
-      },
+      location: { city: 'Boston' },
       alertTypes: ['rain'],
       notificationMethods: ['email']
     };
@@ -86,8 +70,28 @@ describe('POST /subscribe', () => {
       .send(payload)
       .expect(400);
 
-    console.log('Invalid email response:', response.body);
-
     expect(response.body.errors).toContain('Invalid email address');
+  });
+
+  it('should submit and verify all generated subscriptions', async () => {
+    const subscriptions = generateSubscriptionBatch(5);
+
+    for (const payload of subscriptions) {
+      const response = await request(app)
+        .post('/subscribe')
+        .send(payload)
+        .expect(201);
+
+      expect(response.body).toHaveProperty('message', 'Subscription saved!');
+      expect(response.body.subscription.email).toBe(payload.email);
+
+      const subInDb = await Subscription.findOne({ email: payload.email });
+      expect(subInDb).not.toBeNull();
+      expect(subInDb.phone).toBe(payload.phone);
+      expect(subInDb.location.city).toBe(payload.location.city);
+    }
+
+    const total = await Subscription.countDocuments();
+    expect(total).toBe(subscriptions.length);
   });
 });
