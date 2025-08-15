@@ -15,7 +15,11 @@ function isValidTimeZone(tz) {
 
 // Middleware
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: [
+        'http://localhost:3000',
+        /\.vercel\.app$/  // allow any *.vercel.app preview/prod
+    ],
+    methods: ['GET','POST','PUT','DELETE','OPTIONS'],
     credentials: true
 }));
 
