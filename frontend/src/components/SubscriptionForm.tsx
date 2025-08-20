@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { api, SubscriptionData } from '@/lib/api';
+import { api } from '@/lib/api';
 
 interface SubscriptionFormProps {
   onSuccess?: () => void;
@@ -66,7 +66,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onSuccess }) => {
           text: response.error || 'Failed to create subscription' 
         });
       }
-    } catch (error) {
+    } catch {
       setMessage({ 
         type: 'error', 
         text: 'Network error. Please try again.' 

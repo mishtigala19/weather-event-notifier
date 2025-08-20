@@ -10,7 +10,7 @@ export interface SubscriptionData {
   alertType: 'rain' | 'heat' | 'storm' | 'snow' | 'wind';  // Changed from array to single value
 }
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   message?: string;
