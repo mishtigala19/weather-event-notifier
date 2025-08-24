@@ -257,4 +257,4 @@ class WeatherScheduler {
     }
 }
 
-export default WeatherScheduler();
+export default WeatherScheduler;
