@@ -1,7 +1,7 @@
 import express from 'express';
 import weatherService from '../services/weatherService.js';
 import eventDetector from '../services/eventDetector.js';
-import Subscription from '../models/Subscriptio.js';
+import Subscription from '../models/Subscription.js';
 import { sendSMS } from '../services/smsService.js';
 import { sendEmailAlert } from '../services/emailService.js';
 
