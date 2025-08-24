@@ -1,7 +1,8 @@
-const express = require('express')
-const app = express()
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import Subscription from './models/Subscription.js';
 
+const app = express();
 // function to validate time zones
 function isValidTimeZone(tz) {
     try {
@@ -96,4 +97,4 @@ app.get('/status', async (req, res) => {
     }
 });
 
-module.exports = app
+export default app;

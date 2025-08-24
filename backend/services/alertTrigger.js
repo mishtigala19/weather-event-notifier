@@ -1,8 +1,8 @@
 // services/alertTrigger.js
-const Subscription = require('../models/Subscription');
-const weatherService = require('../../../backend/services/weatherService');
+import Subscription from '../models/Subscription';
+import weatherService from '../../../backend/services/weatherService';
 
-async function checkAlertsAndTrigger() {
+export async function checkAlertsAndTrigger() {
   const subscriptions = await Subscription.find({ isActive: true });
 
   for (const sub of subscriptions) {
@@ -26,4 +26,4 @@ async function checkAlertsAndTrigger() {
   }
 }
 
-module.exports = { checkAlertsAndTrigger };
+export default { checkAlertsAndTrigger };

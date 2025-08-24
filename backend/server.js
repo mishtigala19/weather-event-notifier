@@ -1,21 +1,20 @@
-require('dotenv').config();
-const app = require('./app');
-const connectDB = require('./config/database');
-const WeatherScheduler = require('./services/scheduler');
-const subscriptionRoutes = require('./routes/subscription');
+import 'dotenv/config.js';
+import app from './app.js';
+import connectDB from './config/database.js';
+import WeatherScheduler from './services/scheduler.js';
+import subscriptionRoutes from './routes/subscription.js';
+import weatherRoutes from './routes/weather.js';
+import eventRoutes from '.routes/events.js';
+import weatherService from './services/weatherService.js';
+
 const PORT = process.env.PORT || 5001;
 
 // Connecting to MongoDB
 connectDB();
 
-// Import and use weather routes
-const weatherRoutes = require('./routes/weather');
-app.use('/api/weather', weatherRoutes);
-
-// Import and use event routes
-const eventRoutes = require('./routes/events');
+// Routes
 app.use('/api/events', eventRoutes);
-
+app.use('/api/weather', weatherRoutes);
 app.use('/api/subscription', subscriptionRoutes);
 
 // Enhanced server startup with weather API validation
@@ -26,7 +25,6 @@ app.listen(PORT, async () => {
     
     // Test weather service on startup
     try {
-        const weatherService = require('./services/weatherService');
         const testResult = await weatherService.testConnection();
         
         if (testResult.success) {
@@ -35,7 +33,6 @@ app.listen(PORT, async () => {
 
             // Start weather scheduling after API successful connection
             console.log('🕐 Starting weather alert scheduler...');
-            const scheduler = new WeatherScheduler();
             scheduler.startPeriodicChecks();
             console.log('✅ Weather Scheduler started - checking every 30 minutes.');
         } else {

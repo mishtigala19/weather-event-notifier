@@ -1,17 +1,17 @@
-const cron = require('node-cron');
-const moment = require('moment-timezone');
-const Subscription = require('../models/Subscription');
-const weatherService = require('./weatherService');
-const eventDetector = require('./eventDetector');
-const emailService = require('./emailService');
-const smsService = require('./smsService');
-const { getNowInZone, formatTime } = require('../utils/time');
+import cron from 'node-cron';
+import Subscription from '../models/Subscription.js';
+import weatherService from './weatherService.js';
+import EventDetector from './eventDetector.js';
+import emailService from './emailService.js';
+import smsService from './smsService.js';
+import { getNowInZone, formatTime } from '../utils/time.js';
 
 
 class WeatherScheduler {
     constructor() {
         this.isRunning = false;
         this.jobCount = 0;
+        this.mainJob = null;
     }
 
     // Start the main periodic checks
@@ -71,7 +71,7 @@ class WeatherScheduler {
     async checkSubscription(subscription) {
         try {
 
-            const { location, alertTypes, timezone, quietHours, alertCooldown, lastNotified, alertTime } = subscription;
+            const { location, alertTypes = [], timezone, quietHours, alertCooldown, lastNotified, alertTime } = subscription;
 
             // Skip if in quiet hours
             if (this.isInQuietHours(timezone, quietHours)) {
@@ -96,34 +96,33 @@ class WeatherScheduler {
             }
 
             // Check for events
-            const detector = new eventDetector.EventDetector();
+            const detector = new EventDetector();
             const events = detector.detectEvents(weatherData.data);
 
             // Check for alert time
             const nowInZone = getNowInZone(timezone);
             const nowStr = formatTime(nowInZone);
             if (nowStr !== alertTime) {
+                await this.updateLastChecked(subscription._id);
                 return false;
             }
 
             // Find matching alerts
-            const matchingAlerts = events.filter(event =>
-                alertTypes.includes(event.type.toLowerCase())
-            );
+            const lowered = alertTypes.map((t) => String(t).toLowerCase());
+            const matching = events.filter((e) => lowered.includes(String(e.type).toLowerCase()));
 
-            if (matchingAlerts.length > 0) {
-                console.log(`🚨 Found ${matchingAlerts.length} matching alerts for ${subscription.email}`);
-                await this.sendAlerts(subscription, matchingAlerts, weatherData.data);
+            if (matching.length) {
+                console.log(`🚨 Found ${matching.length} matching alerts for ${subscription.email}`);
+                await this.sendAlerts(subscription, matching, weatherData.data);
                 await this.updateLastNotified(subscription._id);
                 await this.updateLastChecked(subscription._id);
                 return true;
-            } else {
-                // No alerts, just update last checked
-                await this.updateLastChecked(subscription._id);
-                return false;
             }
 
-        } catch (error) {
+            await this.updateLastChecked(subscription._id);
+            return false;
+
+        }   catch (error) {
             console.error(` Error checking subscription ${subscription._id}:`, error.message);
             // Still update lastChecked to prevent stuck subscriptions
             await this.updateLastChecked(subscription._id);
@@ -258,4 +257,4 @@ class WeatherScheduler {
     }
 }
 
-module.exports = WeatherScheduler;
+export default new WeatherScheduler();

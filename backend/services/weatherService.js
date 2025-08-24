@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 require('dotenv').config();
 
 class WeatherService {
@@ -158,4 +158,4 @@ class WeatherService {
   }
 }
 
-module.exports = new WeatherService();
+export default new WeatherService();

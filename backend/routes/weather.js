@@ -1,8 +1,8 @@
-const express = require('express');
-const weatherService = require('../services/weatherService');
-const router = express.Router();
-const mapWeatherCodeToAlert = require('../utils/mapWeatherCode');
+import express from 'express';
+import weatherService from '../services/weatherService.js';
+import mapWeatherCodeToAlert from '../utils/mapWeatherCode.js';
 
+const router = express.Router();
 
 /**
  * Test API connection
@@ -119,5 +119,5 @@ router.get('/coordinates/:lat/:lon', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
 

@@ -1,24 +1,34 @@
-function mapWeatherCodeToAlert(code) {
-    if (code >= 200 && code <= 232) {
-      return "Storm Alert";
-    } else if (code >= 300 && code <= 321) {
-      return "Rain Alert";
-    } else if (code >= 500 && code <= 531) {
-      return "Rain Alert";
-    } else if (code >= 600 && code <= 622) {
-      return "Snow Alert";
-    } else if (code >= 701 && code <= 781) {
-      return "Fog Alert";
-    } else if (code === 800) {
-      return "Clear Weather";
-    } else if (code >= 801 && code <= 804) {
-      return "Cloudy Weather";
-    } else if (code >= 900 && code <= 906) {
-      return "Extreme Weather Alert";
-    } else {
-      return "Unknown Weather Condition";
+export default function mapWeatherCodeToAlert(code) {
+    // severe
+    if ((code >= 200 && code <= 232) || code === 771 || code === 781) {
+      return "Storm Alert"; // thunderstorms, sqall, or tornado
     }
+    // precipitation
+    if ((code >= 300 && code <= 321) || (code >= 500 && code <= 531)) {
+      return "Rain Alert";
+    }
+    if (code >= 600 && code <= 622) {
+      return "Snow Alert";
+    }
+    // atmospheric conditions
+    if (code === 741) return "Fog Alert";
+    if (code >= 701 && code <= 780) {
+      return "Air Quality / Visibility Alert"; // mist/smoke/haze/dust/sand/ash
+    }
+    
+    // clouds
+    if (code === 800) {
+      return "Clear Weather";
+    } 
+    if (code >= 801 && code <= 804) {
+      return "Cloudy Weather";
+    } 
+    // extremes
+    if (code >= 900 && code <= 906) {
+      return "Extreme Weather Alert";
+    }
+    
+    return "Unknown Weather Condition";
   }
   
-  module.exports = mapWeatherCodeToAlert;
   

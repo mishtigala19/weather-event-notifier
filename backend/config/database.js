@@ -1,17 +1,20 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error('Database connection error:', error);
+export default async function connectDB() {
+    const uri = process.env.MONGODB_URI;
+    if (!uri) {
+        console.error('Missing MONGODB_URI');
         process.exit(1);
     }
-};
-
-module.exports = connectDB;
+    try {
+    const conn = await mongoose.connect(uri, {
+        // Optional niceties:
+        // serverSelectionTimeoutMS: 10000,
+        // dbName: process.env.MONGODB_DB_NAME, // only if your URI doesn’t include the db
+    });
+    console.log(`MongoDB connected: ${conn.connection.host}`);
+    } catch (error) {
+    console.error('Database connection error:', error.message);
+    process.exit(1);
+    }
+}

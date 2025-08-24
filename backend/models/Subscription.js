@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const subscriptionSchema = new mongoose.Schema({
     // User's contact info
@@ -119,4 +119,4 @@ subscriptionSchema.index({ isActive: 1 });
 subscriptionSchema.index({ lastChecked: 1 });
 subscriptionSchema.index({ timezone: 1 });
 
-module.exports = mongoose.model('Subscription', subscriptionSchema);
+export default mongoose.model('Subscription', subscriptionSchema);

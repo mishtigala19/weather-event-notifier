@@ -1,11 +1,11 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config();
+import nodemailer from 'nodemailer';
+import 'dotenv/config';
 
 // Create transporter
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, // true for 465, false for other ports
+  port: Number(process.env.EMAIL_PORT) || 587,
+  secure: process.env.EMAIL_SECURE === 'true' || Number(process.env.EMAIL_PORT) === 465, // true for 465, false for other ports
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -47,4 +47,4 @@ const sendEmailAlert = async (to, subject, alertType, weatherData, city) => {
   }
 };
 
-module.exports = { sendEmailAlert };
+export default { sendEmailAlert };

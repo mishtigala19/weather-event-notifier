@@ -223,4 +223,4 @@ class EventDetector {
     }
 }
 
-module.exports = new EventDetector();
+export default new EventDetector();

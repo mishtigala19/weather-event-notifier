@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import Subscription from '../models/Subscription.js';
 const router = express.Router();
-const Subscription = require('../models/Subscription');
 
 // DELETE /api/subscription/:id
 router.delete('/:id', async (req, res) => {
@@ -87,4 +87,4 @@ router.get('/:id/unsubscribe', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,9 +1,10 @@
-const express = require('express');
-const weatherService = require('../services/weatherService');
-const eventDetector = require('../services/eventDetector');
-const Subscription = require('../models/Subscription');
-const { sendSMS } = require('../services/smsService');
-const { sendEmailAlert } = require('../services/emailService');
+import express from 'express';
+import weatherService from '../services/weatherService';
+import eventDetector from '../services/eventDetector';
+import Subscription from '../models/Subscription';
+import { sendSMS } from '../services/smsService';
+import { sendEmailAlert } from '../services/emailService';
+
 const router = express.Router();
 
 /**
@@ -222,4 +223,4 @@ async function notifySubscribers(cityName, detectedEvents, weatherData) {
     }
 }
 
-module.exports = router;
+export default router;
