@@ -4,7 +4,7 @@ import connectDB from './config/database.js';
 import WeatherScheduler from './services/scheduler.js';
 import subscriptionRoutes from './routes/subscription.js';
 import weatherRoutes from './routes/weather.js';
-import eventRoutes from '.routes/events.js';
+import eventRoutes from './routes/events.js';
 import weatherService from './services/weatherService.js';
 
 const PORT = process.env.PORT || 5001;
@@ -33,6 +33,7 @@ app.listen(PORT, async () => {
 
             // Start weather scheduling after API successful connection
             console.log('🕐 Starting weather alert scheduler...');
+            const scheduler = new WeatherScheduler();
             scheduler.startPeriodicChecks();
             console.log('✅ Weather Scheduler started - checking every 30 minutes.');
         } else {

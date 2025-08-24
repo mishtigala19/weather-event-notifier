@@ -1,6 +1,6 @@
 // services/alertTrigger.js
-import Subscription from '../models/Subscription';
-import weatherService from '../../../backend/services/weatherService';
+import Subscription from '../models/Subscription.js';
+import weatherService from '../../../backend/services/weatherService.js';
 
 export async function checkAlertsAndTrigger() {
   const subscriptions = await Subscription.find({ isActive: true });

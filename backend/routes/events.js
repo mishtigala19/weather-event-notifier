@@ -1,9 +1,9 @@
 import express from 'express';
-import weatherService from '../services/weatherService';
-import eventDetector from '../services/eventDetector';
-import Subscription from '../models/Subscription';
-import { sendSMS } from '../services/smsService';
-import { sendEmailAlert } from '../services/emailService';
+import weatherService from '../services/weatherService.js';
+import eventDetector from '../services/eventDetector.js';
+import Subscription from '../models/Subscriptio.js';
+import { sendSMS } from '../services/smsService.js';
+import { sendEmailAlert } from '../services/emailService.js';
 
 const router = express.Router();
 
