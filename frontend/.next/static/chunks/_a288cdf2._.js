@@ -287,7 +287,7 @@ __turbopack_context__.s({
     "api": (()=>api)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
-const API_BASE_URL = ("TURBOPACK compile-time value", "http://localhost:5001") || 'http://localhost:5001';
+const API_BASE_URL = ("TURBOPACK compile-time value", "http://localhost:3001") || 'http://localhost:3001';
 class ApiService {
     async request(endpoint, options = {}) {
         try {
@@ -467,7 +467,7 @@ const SubscriptionForm = ({ onSuccess })=>{
                     text: response.error || 'Failed to create subscription'
                 });
             }
-        } catch (error) {
+        } catch  {
             setMessage({
                 type: 'error',
                 text: 'Network error. Please try again.'

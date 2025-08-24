@@ -318,7 +318,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 function Features() {
     const features = [
         {
-            icon: "📧",
+            icon: "🔧",
             title: "Email and SMS Alerts",
             description: "Choose how you want to receive alert - email for detailed info or SMS for urgent warnings on the go.",
             color: "from-blue-500 to-cyan-500"
@@ -326,7 +326,7 @@ function Features() {
         {
             icon: "📍",
             title: "Location-Based",
-            description: "Precise weather mointoring based on your location to ensure accuracy.",
+            description: "Precise weather monitoring based on your location to ensure accuracy.",
             color: "from-green-500 to-emerald-500"
         },
         {
@@ -338,8 +338,8 @@ function Features() {
         {
             icon: "⚡️",
             title: "Real-Time Data",
-            description: "Powered by OpenWeatherMap API",
-            color: "from-orange-500 to-red-500 for accurate and instant weather conditions and forecast."
+            description: "Powered by OpenWeatherMap API for accurate and instant weather conditions and forecast.",
+            color: "from-orange-500 to-red-500"
         }
     ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -354,18 +354,18 @@ function Features() {
                             className: "group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: 'w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300',
+                                    className: `w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`,
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-2xl",
                                         children: feature.icon
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Features.tsx",
-                                        lineNumber: 41,
+                                        lineNumber: 39,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Features.tsx",
-                                    lineNumber: 40,
+                                    lineNumber: 38,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -373,7 +373,7 @@ function Features() {
                                     children: feature.title
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Features.tsx",
-                                    lineNumber: 44,
+                                    lineNumber: 42,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -381,7 +381,7 @@ function Features() {
                                     children: feature.description
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Features.tsx",
-                                    lineNumber: 48,
+                                    lineNumber: 46,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -390,23 +390,23 @@ function Features() {
                                         className: "h-1 w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Features.tsx",
-                                        lineNumber: 53,
+                                        lineNumber: 51,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Features.tsx",
-                                    lineNumber: 52,
+                                    lineNumber: 50,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, index, true, {
                             fileName: "[project]/src/components/Features.tsx",
-                            lineNumber: 36,
+                            lineNumber: 34,
                             columnNumber: 25
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/components/Features.tsx",
-                    lineNumber: 34,
+                    lineNumber: 32,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -419,37 +419,37 @@ function Features() {
                                 children: "🎯"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Features.tsx",
-                                lineNumber: 61,
+                                lineNumber: 59,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "text-gray-700 font-medium",
-                                children: "Verrified and Accurate Alerts"
+                                children: "Verified and Accurate Alerts"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Features.tsx",
-                                lineNumber: 62,
+                                lineNumber: 60,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Features.tsx",
-                        lineNumber: 60,
+                        lineNumber: 58,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/Features.tsx",
-                    lineNumber: 59,
+                    lineNumber: 57,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Features.tsx",
-            lineNumber: 33,
+            lineNumber: 31,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/Features.tsx",
-        lineNumber: 32,
+        lineNumber: 30,
         columnNumber: 9
     }, this);
 }

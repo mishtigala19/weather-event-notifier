@@ -256,7 +256,7 @@ var { g: global, __dirname } = __turbopack_context__;
 __turbopack_context__.s({
     "api": (()=>api)
 });
-const API_BASE_URL = ("TURBOPACK compile-time value", "http://localhost:5001") || 'http://localhost:5001';
+const API_BASE_URL = ("TURBOPACK compile-time value", "http://localhost:3001") || 'http://localhost:3001';
 class ApiService {
     async request(endpoint, options = {}) {
         try {
@@ -431,7 +431,7 @@ const SubscriptionForm = ({ onSuccess })=>{
                     text: response.error || 'Failed to create subscription'
                 });
             }
-        } catch (error) {
+        } catch  {
             setMessage({
                 type: 'error',
                 text: 'Network error. Please try again.'
