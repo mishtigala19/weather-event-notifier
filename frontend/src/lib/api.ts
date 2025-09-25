@@ -1,7 +1,7 @@
 // lib/api.ts
 // Frontend API service to communicate with the backend
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5001';
 
 export interface SubscriptionData {
   email: string;
@@ -64,12 +64,12 @@ class ApiService {
       location: {
         city: subscriptionData.location
       },
-      alertType: subscriptionData.alertType,
+      alertTypes: [subscriptionData.alertType],
       email: subscriptionData.email,
       phone: subscriptionData.phone || ''  // backend expects 'phone' field
     };
 
-    return this.request('/subscribe', {
+    return this.request('/api/subscription', {
       method: 'POST',
       body: JSON.stringify(transformedData),
     });
