@@ -1,7 +1,24 @@
 // lib/api.ts
 // Frontend API service to communicate with the backend
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
+import axios from "axios";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://umass-codecollab-weather-event-notifier.onrender.com/api";
+
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  headers: { "Content-Type": "application/json" },
+});
+
+type BackendEnvelope<T> = {
+  success?: boolean;
+  data?: T;
+  subscription?: T;
+  message?: string;
+  error?: string;
+  errors?: string[],
+  [key: string]: unknown;
+};
 
 export interface SubscriptionData {
   email: string;
@@ -23,38 +40,27 @@ class ApiService {
     endpoint: string, 
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    try {
-      const url = `${API_BASE_URL}${endpoint}`;
-      
-      const response = await fetch(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          ...options.headers,
-        },
-        ...options,
-      });
+    const method = (options.method || "GET").toLowerCase() as "get" | "post" | "put" | "delete";
+    const data = options.body ? JSON.parse(options.body as string) : undefined;
 
-      const data = await response.json();
+    const res = await axiosInstance.request<T>({
+      url: endpoint,
+      method,
+      data,
+      headers: options.headers as Record<string, string> | undefined
+    });
 
-      if (!response.ok) {
-        return {
-          success: false,
-          error: data.error || data.message || `HTTP ${response.status}`,
-          errors: data.errors,
-        };
-      }
-
-      return {
-        success: true,
-        data: data.subscription || data.data || data,
-        message: data.message,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Network error',
-      };
+    const payload = res.data as unknown as BackendEnvelope<T>;
+    
+    if (payload.error || (payload.success === false)) {
+      return { success: false, error: payload.error ?? payload.message ?? "Request failed", errors: payload.errors };
     }
+
+    return {
+      success: true,
+      data: (payload.subscription ?? payload.data ?? (res.data as unknown as T)),
+      message: payload.message
+    };
   }
 
   // Create a new subscription
@@ -66,7 +72,7 @@ class ApiService {
       },
       alertType: subscriptionData.alertType,
       email: subscriptionData.email,
-      phone: subscriptionData.phone || ''  // backend expects 'phone' field
+      phone: subscriptionData.phone || ""  // backend expects 'phone' field
     };
 
     return this.request('/subscribe', {
@@ -87,22 +93,22 @@ class ApiService {
 
   // Test weather API
   async testWeatherAPI(): Promise<ApiResponse> {
-    return this.request('/api/weather/test');
+    return this.request('/weather/test');
   }
 
   // Get weather by city
   async getWeatherByCity(city: string): Promise<ApiResponse> {
-    return this.request(`/api/weather/city/${encodeURIComponent(city)}`);
+    return this.request(`/weather/city/${encodeURIComponent(city)}`);
   }
 
   // Detect weather events by city
   async detectEventsByCity(city: string): Promise<ApiResponse> {
-    return this.request(`/api/events/detect/${encodeURIComponent(city)}`);
+    return this.request(`/events/detect/${encodeURIComponent(city)}`);
   }
 
   // Delete subscription
   async deleteSubscription(id: string): Promise<ApiResponse> {
-    return this.request(`/api/subscription/${id}`, {
+    return this.request(`/subscription/${id}`, {
       method: 'DELETE',
     });
   }

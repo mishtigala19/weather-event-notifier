@@ -54,6 +54,11 @@ app.get('/', (req, res) => {
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^\+?[0-9]{10,15}$/;
 
+app.get('/trigger', async (_req, res) => {
+    const count = await Subscription.countDocuments({ isActive: true });
+    res.json({ message: `Notifications triggered for ${subscribers.length} subscribers.`, count })
+});
+
 app.post('/subscribe', async (req, res) => {
     const { email, phone, timeZone } = req.body;
     const errors = [];
@@ -70,20 +75,18 @@ app.post('/subscribe', async (req, res) => {
         errors.push('Invalid or missing timeZone');
     }
 
-    if (errors.length > 0) {
+    if (errors.length) {
         return res.status(400).json({ errors });
     }
 
     try {
-        const subscription = await Subscription.create(req.body);
+        const payload = {...req.body, timezone: tz };
+        delete payload.timeZone;
+        const subscription = await Subscription.create(payload);
         res.status(201).json({ message: 'Subscription saved!', subscription });
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
-});
-
-app.get('/trigger', (req, res) => {
-    res.json({ message: `Notifications triggered for ${subscribers.length} subscribers.` })
 });
 
 app.get('/status', async (req, res) => {

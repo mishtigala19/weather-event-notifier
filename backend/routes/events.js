@@ -28,10 +28,10 @@ router.get('/city/:cityName', async (req, res) => {
         const weatherData = await weatherService.getWeatherByCity(cityName);
 
         // Detect events
-        const eventSummary = eventDetector.getEventSummary(weatherData);
+        const eventSummary = eventDetector.detectEvents ? eventDetector.detectEvents(weatherData) : eventDetector.getEventSummary(weatherData);
 
         // Notify subscribers if events are detected
-        if (eventSummary && eventSummary.length > 0) {
+        if (detectEvents?.length) {
             await notifySubscribers(cityName, eventSummary, weatherData);
         }
 
@@ -43,11 +43,12 @@ router.get('/city/:cityName', async (req, res) => {
                 events: eventSummary
             }
         });
-    } catch (error) {
-        res.status(400).json({
+    } catch (err) {
+        console.error('Error detecting city events:', err);
+        res.status(500).json({
             success: false,
             message: 'Failed to detect weather events',
-            error: error.message
+            error: err.message
         });
     }
 });
@@ -76,7 +77,7 @@ router.get('/coordinates/:lat/:lon', async (req, res) => {
         const weatherData = await weatherService.getWeatherByCoordinates(latitude, longitude);
 
         // Detect events
-        const eventSummary = eventDetector.getEventSummary(weatherData);
+        const eventSummary = eventDetector.detectEvents ? eventDetector.detectEvents(weatherData) : eventDetector.getEventSummary(weatherData);
 
         // Notify subscribers if events are detected
         if (eventSummary && eventSummary.length > 0) {
@@ -92,11 +93,12 @@ router.get('/coordinates/:lat/:lon', async (req, res) => {
                 events: eventSummary
             }
         });
-    } catch (error) {
-        res.status(400).json({
+    } catch (err) {
+        console.error('Error detecting city events:', err);
+        res.status(500).json({
             success: false,
             message: 'Failed to detect weather events', 
-            error: error.message
+            error: err.message
         });
     }
 });
@@ -112,7 +114,7 @@ router.get('/test', async (req, res) => {
         const weatherData = await weatherService.getWeatherByCity('Phoenix'); // warm/hot city
 
         // Detect events
-        const eventSummary = eventDetector.getEventSummary(weatherData);
+        const eventSummary = eventDetector.detectEvents ? eventDetector.detectEvents(weatherData) : eventDetector.getEventSummary(weatherData);
 
         res.json({
             success: true,
@@ -122,11 +124,11 @@ router.get('/test', async (req, res) => {
                 events: eventSummary
             }
         });
-    } catch (error) {
+    } catch (err) {
         res.status(500).json({
             success: false,
             message: 'Event detection test failed',
-            error: error.message
+            error: err.message
         });
     }
 });
@@ -138,7 +140,7 @@ router.get('/test', async (req, res) => {
 
 router.get('/test-email', async (req, res) => {
     try {
-        const testResult = await sendEmailAlert(
+        await sendEmailAlert(
             'test@example.com', // Replace with your email for testing
             'Test Weather Alert',
             'Rain Alert',
@@ -147,19 +149,19 @@ router.get('/test-email', async (req, res) => {
                 main: { temp: 298.55 },
                 name: 'Boston'
             },
-            'Boston'
+            'Boston',
+            `${process.env.BASE_URL || 'https://localhost:5001'}/api/subscription/test/unsubscribe`
         );
         
         res.json({
             success: true,
             message: 'Test email sent',
-            result: testResult
         });
-    } catch (error) {
+    } catch (err) {
         res.status(500).json({
             success: false,
             error: 'Failed to send test email',
-            details: error.message
+            details: err.message
         });
     }
 });
@@ -183,18 +185,17 @@ async function notifySubscribers(cityName, detectedEvents, weatherData) {
             for (const event of detectedEvents) {
                 // Check if subscriber is interested in this event type
                 if (subscriber.alertTypes.includes(event.type)) {
-                    const unsubLink = `${process.env.BASE_URL || 'http://localhost:3001'}/api/subscription/${subscriber._id}/unsubscribe`;
+                    const unsubLink = `${process.env.BASE_URL || 'http://localhost:5001'}/api/subscription/${subscriber._id}/unsubscribe`;
 
                     // Send SMS if subscriber prefers SMS
                     if (subscriber.notificationMethods.includes('sms') && subscriber.phone) {
-                        const smsMessage = `Weather alert for ${cityName}: ${event.title} - ${event.description}. 
-                                          To unsubscribe from all alerts, click: ${unsubLink}`;
+                        const smsMessage = `Weather alert for ${cityName}: ${event.title} - ${event.description}. Unsubscribe: ${unsubLink}`;
 
                         try {
                             await sendSMS(subscriber.phone, smsMessage);
                             console.log(`SMS sent to ${subscriber.phone} for ${event.type}`);
-                        } catch (smsError) {
-                            console.error(`Failed to send SMS to ${subscriber.phone}:`, smsError.message);
+                        } catch (smsErr) {
+                            console.error(`Failed to send SMS to ${subscriber.phone}:`, smsErr.message);
                         }
                     }
 
@@ -208,7 +209,8 @@ async function notifySubscribers(cityName, detectedEvents, weatherData) {
                                 subject,
                                 event.title,
                                 weatherData,
-                                cityName
+                                cityName,
+                                unsubLink
                             );
                             console.log(`Email sent to ${subscriber.email} for ${event.type}`);
                         } catch (emailError) {

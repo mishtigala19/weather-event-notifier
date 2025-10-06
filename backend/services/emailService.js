@@ -13,10 +13,10 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to send email alerts
-export const sendEmailAlert = async (to, subject, alertType, weatherData, city) => {
+export const sendEmailAlert = async (to, subject, alertType, weatherData, city, unsubscribeUrl) => {
   try {
     // Generate unsubscribe link (following Minh's approach)
-    const unsubscribeLink = `${process.env.BASE_URL || 'http://localhost:3001'}/api/unsubscribe?email=${encodeURIComponent(to)}`;
+    const unsubscribeLink = unsubscribeUrl || `${process.env.BASE_URL || 'http://localhost:3001'}/api/subscription/unsubscribe`;
     
     const htmlContent = `
       <h2>${alertType} Alert for ${city}</h2>
