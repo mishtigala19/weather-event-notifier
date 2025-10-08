@@ -1,7 +1,6 @@
 // lib/api.ts
 // Frontend API service to communicate with the backend
 
-<<<<<<< HEAD
 import axios from "axios";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://umass-codecollab-weather-event-notifier.onrender.com/api";
@@ -20,9 +19,6 @@ type BackendEnvelope<T> = {
   errors?: string[],
   [key: string]: unknown;
 };
-=======
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5001';
->>>>>>> 804efa70883ce964275d3ee4d8ec5971aec537d4
 
 export interface SubscriptionData {
   email: string;
