@@ -43,7 +43,12 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onSuccess }) => {
     }
 
     try {
+      // Debug: show what we are about to send
+      // eslint-disable-next-line no-console
+      console.log('[subscription] submit', formData);
       const response = await api.createSubscription(formData);
+      // eslint-disable-next-line no-console
+      console.log('[subscription] response', response);
       
       if (response.success) {
         setMessage({ 
@@ -71,6 +76,8 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onSuccess }) => {
         type: 'error', 
         text: 'Network error. Please try again.' 
       });
+      // eslint-disable-next-line no-console
+      console.error('[subscription] network error');
     } finally {
       setIsSubmitting(false);
     }
@@ -95,7 +102,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onSuccess }) => {
             value={formData.location}
             onChange={handleInputChange}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
             placeholder="Boston"
           />
           <p className="mt-1 text-sm text-gray-500">Enter your city name</p>
@@ -146,7 +153,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onSuccess }) => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
               placeholder="your.email@example.com"
             />
           </div>
@@ -161,7 +168,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onSuccess }) => {
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
               placeholder="+1234567890"
             />
             <p className="mt-1 text-sm text-gray-500">Include country code for SMS alerts</p>

@@ -1,17 +1,19 @@
 import express from 'express';
 import Subscription from '../models/Subscription.js';
 import weatherService from '../services/weatherService.js';
+import { sendSMS } from '../services/smsService.js';
+import { sendEmailAlert } from '../services/emailService.js';
 
 const router = express.Router();
 
 
 // POST /api/subscription  → create a new subscription
 router.post('/', async (req, res) => {
-  const { email, phone, location, alertTypes } = req.body;
+  const { email, phone, location, alertTypes, notificationMethods, timezone } = req.body;
   
   const hasCity = !!location?.city;
   const hasCoords = location?.coordinates?.lat != null && location?.coordinates?.lon != null;
-  if (!email || !phone || !(hasCity || hasCoords) || !Array.isArray(alertTypes) || alertTypes.length === 0) {
+  if (!email || !(hasCity || hasCoords) || !Array.isArray(alertTypes) || alertTypes.length === 0) {
     return res.status(400).json({
       success: false,
       message: 'Missing required fields.'
@@ -21,8 +23,71 @@ router.post('/', async (req, res) => {
   try {
     console.log('SUBSCRIBE ROUTE VERSION v3', { gotCity: location?.city, gotCountry: location?.country });
     // Save to DB
-    const newSub = new Subscription({ email, phone, location, alertTypes });
+    const newSub = new Subscription({
+      email,
+      phone,
+      location,
+      alertTypes,
+      notificationMethods: Array.isArray(notificationMethods) && notificationMethods.length ? notificationMethods : ['email'],
+      timezone: typeof timezone === 'string' && timezone ? timezone : 'America/New_York'
+    });
     await newSub.save();
+
+    // Fire-and-forget: send welcome notification with current weather
+    (async () => {
+      try {
+        const baseUrl = process.env.BASE_URL || 'http://localhost:5001';
+        const unsubLink = `${baseUrl}/api/subscription/${newSub._id}/unsubscribe`;
+
+        // Decide notification channels
+        const shouldEmail = Array.isArray(notificationMethods)
+          ? notificationMethods.includes('email')
+          : true; // default to email if none provided
+        const shouldSms = Array.isArray(notificationMethods) && notificationMethods.includes('sms') && !!phone;
+
+        // Fetch current weather for provided location
+        let weatherData = null;
+        const city = (location?.city || '').trim();
+        const country = (location?.country || '').trim();
+
+        if (city) {
+          const q = country ? `${city},${country}` : city;
+          weatherData = await weatherService.getWeatherByCity(q);
+        } else if (
+          location?.coordinates?.lat != null &&
+          location?.coordinates?.lon != null
+        ) {
+          const { lat, lon } = location.coordinates;
+          weatherData = await weatherService.getWeatherByCoordinates(lat, lon);
+        }
+
+        const readableCity = city || (weatherData?.name ?? 'your area');
+        const description = weatherData?.current?.description ?? 'N/A';
+        const temperature = Math.round(weatherData?.current?.temperature ?? 0);
+
+        if (shouldEmail && email) {
+          await sendEmailAlert(
+            email,
+            'Welcome to Weather Event Notifier',
+            'Subscription Confirmed',
+            weatherData || {},
+            readableCity,
+            unsubLink
+          );
+        }
+
+        if (shouldSms && phone) {
+          const smsMessage = `Welcome! Current weather in ${readableCity}: ${description}, ${temperature}°C. Unsubscribe: ${unsubLink}`;
+          try {
+            await sendSMS(phone, smsMessage);
+          } catch (smsErr) {
+            console.error('Welcome SMS failed:', smsErr.message);
+          }
+        }
+      } catch (notifyErr) {
+        console.error('Welcome notification failed:', notifyErr.message);
+      }
+    })();
 
     // Optional: quick weather fetch to validate API & location
     let weatherSnippet = null;

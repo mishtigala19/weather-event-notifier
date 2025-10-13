@@ -35,7 +35,7 @@ class EventDetector {
         if (stormEvent) events.push(stormEvent);
 
         
-        console.log('Detected ${events.length} weather events for ${weatherData.location.name}');
+        console.log(`Detected ${events.length} weather events for ${weatherData.location?.name}`);
         return events;
     }
 
@@ -52,10 +52,10 @@ class EventDetector {
                 type: 'heat',
                 severity: 'extreme',
                 title: 'Extreme Heat Warning',
-                description: 'Dangerous heat conditions with temperature at ${temperature}°C',
+                description: `Dangerous heat conditions with temperature at ${temperature}°C`,
                 temperature: temperature,
-                reccomendations: [
-                    'Stay indoords during peak hours',
+                recommendations: [
+                    'Stay indoors during peak hours',
                     'Drink plenty of water',
                     'Avoid strenuous outdoor activities'
                 ]
@@ -65,9 +65,9 @@ class EventDetector {
                 type: 'heat',
                 severity: 'high',
                 title: 'Heat Advisory',
-                description: 'High temperature warning at ${temperature}°C',
+                description: `High temperature warning at ${temperature}°C`,
                 temperature: temperature,
-                reccomendations: [
+                recommendations: [
                     'Take frequent breaks in the shade',
                     'Stay hydrated',
                     'Wear light-colored clothing'
@@ -78,9 +78,9 @@ class EventDetector {
                 type: 'heat',
                 severity: 'moderate',
                 title: 'Warm Weather Alert',
-                description: 'Warm conditions at ${temperature}°C',
+                description: `Warm conditions at ${temperature}°C`,
                 temperature: temperature,
-                reccomendations: [
+                recommendations: [
                     'Stay hydrated',
                     'Seek shade when possible'
                 ]
@@ -102,7 +102,7 @@ class EventDetector {
         if (main === 'Rain' || main === 'Drizzle') {
             let severity = 'light';
             let title = 'Light rain';
-            let reccomendations = ['Carry an umbrella', 'Drive carefully'];
+            let recommendations = ['Carry an umbrella', 'Drive carefully'];
 
             // Determine severity based on description
             const lowerDesc = description.toLowerCase();
@@ -110,7 +110,7 @@ class EventDetector {
             if (lowerDesc.includes('heavy') || lowerDesc.includes('intense')) {
                 severity = 'heavy';
                 title = 'Heavy Rain Warning';
-                reccomendations = [
+                recommendations = [
                     'Avoid driving if possible',
                     'Stay indoors',
                     'Watch for flooding',
@@ -119,7 +119,7 @@ class EventDetector {
             } else if (lowerDesc.includes('moderate')) {
                 severity = 'moderate'
                 title = 'Moderate Rain Alert';
-                reccomendations = [
+                recommendations = [
                     'Carry rain gear',
                     'Allow extra travel time',
                     'Drive with caution'
@@ -128,11 +128,11 @@ class EventDetector {
 
             return {
                 type: 'rain',
-                severity: serverity,
+                severity: severity,
                 title: title,
-                description: '${description.charAt(0).toUpperCase() + description.slice(1)} expected',
+                description: `${description.charAt(0).toUpperCase() + description.slice(1)} expected`,
                 weatherCondition: main,
-                reccomendations: reccomendations
+                recommendations: recommendations
             };
         }
 
@@ -155,7 +155,7 @@ class EventDetector {
         if (isThunderstorm || isHighWind) {
             let severity = 'moderate';
             let title = 'Storm Alert';
-            let reccomendations = [
+            let recommendations = [
                 'Stay indoors',
                 'Avoid open areas',
                 'Unplug electronics'
@@ -165,7 +165,7 @@ class EventDetector {
             if (isThunderstorm && windSpeed > 15) {
                 severity = 'severe';
                 title = 'Severe Thunderstorm Warning';
-                reccomendations = [
+                recommendations = [
                     'Seek immediate shelter',
                     'Avoid windows',
                     'Stay away from electric equipment',
@@ -175,7 +175,7 @@ class EventDetector {
             } else if (windSpeed > 20) {
                 severity = 'severe';
                 title = 'High Wind Warning';
-                reccomendations = [
+                recommendations = [
                     'Secure outdoor items',
                     'Avoid driving high-profile vehicles',
                     'Stay away from trees and power lines',
@@ -187,10 +187,10 @@ class EventDetector {
                 type: 'storm',
                 severity: severity,
                 title: title,
-                description: '${description.charAt(0).toUpperCase() + description.slice(1)} with wind speed ${windSpeed} m/s',
+                description: `${description.charAt(0).toUpperCase() + description.slice(1)} with wind speed ${windSpeed} m/s`,
                 weatherCondition: main, 
                 windSpeed: windSpeed,
-                reccomendations: reccomendations
+                recommendations: recommendations
             };
         }
 
@@ -208,9 +208,9 @@ class EventDetector {
         const events = this.detectEvents(weatherData);
 
         const summary = {
-            location: weatherData.location.name,
+            location: weatherData.location?.name,
             timestamp: weatherData.timestamp,
-            totalEvents: event.length,
+            totalEvents: events.length,
             events: events,
             alerts: {
                 heat: events.filter(e => e.type === 'heat').length,

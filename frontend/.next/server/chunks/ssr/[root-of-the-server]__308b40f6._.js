@@ -256,37 +256,42 @@ var { g: global, __dirname } = __turbopack_context__;
 __turbopack_context__.s({
     "api": (()=>api)
 });
-const API_BASE_URL = ("TURBOPACK compile-time value", "http://localhost:3001") || 'http://localhost:3001';
+(()=>{
+    const e = new Error("Cannot find module 'axios'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
+;
+const API_BASE_URL = ("TURBOPACK compile-time value", "https://backend_API_endpoint.com") || "https://umass-codecollab-weather-event-notifier.onrender.com/api";
+const axiosInstance = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+        "Content-Type": "application/json"
+    }
+});
 class ApiService {
     async request(endpoint, options = {}) {
-        try {
-            const url = `${API_BASE_URL}${endpoint}`;
-            const response = await fetch(url, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...options.headers
-                },
-                ...options
-            });
-            const data = await response.json();
-            if (!response.ok) {
-                return {
-                    success: false,
-                    error: data.error || data.message || `HTTP ${response.status}`,
-                    errors: data.errors
-                };
-            }
-            return {
-                success: true,
-                data: data.subscription || data.data || data,
-                message: data.message
-            };
-        } catch (error) {
+        const method = (options.method || "GET").toLowerCase();
+        const data = options.body ? JSON.parse(options.body) : undefined;
+        const res = await axiosInstance.request({
+            url: endpoint,
+            method,
+            data,
+            headers: options.headers
+        });
+        const payload = res.data;
+        if (payload.error || payload.success === false) {
             return {
                 success: false,
-                error: error instanceof Error ? error.message : 'Network error'
+                error: payload.error ?? payload.message ?? "Request failed",
+                errors: payload.errors
             };
         }
+        return {
+            success: true,
+            data: payload.subscription ?? payload.data ?? res.data,
+            message: payload.message
+        };
     }
     // Create a new subscription
     async createSubscription(subscriptionData) {
@@ -295,18 +300,20 @@ class ApiService {
             location: {
                 city: subscriptionData.location
             },
-            alertType: subscriptionData.alertType,
+            alertTypes: [
+                subscriptionData.alertType
+            ],
             email: subscriptionData.email,
-            phone: subscriptionData.phone || '' // backend expects 'phone' field
+            phone: subscriptionData.phone || "" // backend expects 'phone' field
         };
-        return this.request('/subscribe', {
+        return this.request('/api/subscription', {
             method: 'POST',
             body: JSON.stringify(transformedData)
         });
     }
     // Get server status
     async getServerStatus() {
-        return this.request('/status');
+        return this.request('/status'); // backend now mirrors /api/status
     }
     // Get all subscribers
     async getSubscribers() {
@@ -314,27 +321,25 @@ class ApiService {
     }
     // Test weather API
     async testWeatherAPI() {
-        return this.request('/api/weather/test');
+        return this.request('/weather/test');
     }
     // Get weather by city
     async getWeatherByCity(city) {
-        return this.request(`/api/weather/city/${encodeURIComponent(city)}`);
+        return this.request(`/weather/city/${encodeURIComponent(city)}`);
     }
     // Detect weather events by city
     async detectEventsByCity(city) {
-        return this.request(`/api/events/detect/${encodeURIComponent(city)}`);
+        return this.request(`/events/city/${encodeURIComponent(city)}`);
     }
     // Delete subscription
     async deleteSubscription(id) {
-        return this.request(`/api/subscription/${id}`, {
+        return this.request(`/subscription/${id}`, {
             method: 'DELETE'
         });
     }
     // Unsubscribe using ID
     async unsubscribe(id) {
-        return this.request(`/unsubscribe/${id}`, {
-            method: 'DELETE'
-        });
+        return this.request(`/subscription/${id}/unsubscribe`);
     }
 }
 const api = new ApiService();

@@ -11,9 +11,9 @@ const subscriptionSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
-        match: [/^\+?[\d\s\-\(\)]{10,}$/, 'Please enter a valid phone number']
+        match: [/^\+?[\d\s\-\(\)]{10,}$/ , 'Please enter a valid phone number']
     },
 
     // Location info
@@ -43,7 +43,8 @@ const subscriptionSchema = new mongoose.Schema({
     notificationMethods: [{
         type: String,
         enum: ['email', 'sms'],
-        required: true
+        default: 'email',
+        required: false
     }],
 
     frequency: {
@@ -85,7 +86,7 @@ const subscriptionSchema = new mongoose.Schema({
     timezone: {
         type: String, 
         default: 'America/New_York',
-        required: true
+        required: false
     },
 
     checkInterval: {

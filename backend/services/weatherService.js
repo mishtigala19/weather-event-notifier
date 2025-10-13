@@ -119,7 +119,8 @@ class WeatherService {
         description: data.weather[0].description,
         main: data.weather[0].main,
         icon: data.weather[0].icon,
-        windSpeed: data.wind?.speed || 0
+        windSpeed: data.wind?.speed || 0,
+        code: data.weather[0].id
       },
       timestamp: new Date().toISOString(),
       source: 'OpenWeatherMap'

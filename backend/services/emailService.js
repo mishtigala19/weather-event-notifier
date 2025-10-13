@@ -22,8 +22,8 @@ export const sendEmailAlert = async (to, subject, alertType, weatherData, city, 
       <h2>${alertType} Alert for ${city}</h2>
       <p>Weather Update:</p>
       <ul>
-        <li><strong>Condition:</strong> ${weatherData.weather[0].description}</li>
-        <li><strong>Temperature:</strong> ${Math.round(weatherData.main.temp - 273.15)}°C</li>
+        <li><strong>Condition:</strong> ${weatherData.current?.description || 'N/A'}</li>
+        <li><strong>Temperature:</strong> ${Math.round(weatherData.current?.temperature ?? 0)}°C</li>
         <li><strong>Location:</strong> ${city}</li>
       </ul>
       <p>Stay safe and take appropriate precautions!</p>

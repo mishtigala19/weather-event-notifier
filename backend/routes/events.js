@@ -31,7 +31,7 @@ router.get('/city/:cityName', async (req, res) => {
         const eventSummary = eventDetector.detectEvents ? eventDetector.detectEvents(weatherData) : eventDetector.getEventSummary(weatherData);
 
         // Notify subscribers if events are detected
-        if (detectEvents?.length) {
+        if (Array.isArray(eventSummary) && eventSummary.length) {
             await notifySubscribers(cityName, eventSummary, weatherData);
         }
 

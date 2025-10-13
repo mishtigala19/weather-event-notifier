@@ -5,10 +5,13 @@ import Footer from '@/components/Footer'
 import FAQ from '@/components/FAQ'
 import About from "@/components/About";
 import SubscriptionForm from '@/components/SubscriptionForm';
+import Warmup from '@/components/Warmup';
 
 export default function Home() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+            {/* Client-only warmup */}
+            <Warmup />
             <Header />
             <Features />
             <main>

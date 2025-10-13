@@ -3,11 +3,13 @@
 
 import axios from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://umass-codecollab-weather-event-notifier.onrender.com/api";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://weather-event-notifier.onrender.com/api";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: { "Content-Type": "application/json" },
+  // Render free tier cold starts can take several seconds
+  timeout: 45000
 });
 
 type BackendEnvelope<T> = {
@@ -42,25 +44,37 @@ class ApiService {
   ): Promise<ApiResponse<T>> {
     const method = (options.method || "GET").toLowerCase() as "get" | "post" | "put" | "delete";
     const data = options.body ? JSON.parse(options.body as string) : undefined;
+    try {
+      // eslint-disable-next-line no-console
+      console.log("[api] request", method.toUpperCase(), `${API_BASE_URL}${endpoint}`, data ?? null);
 
-    const res = await axiosInstance.request<T>({
-      url: endpoint,
-      method,
-      data,
-      headers: options.headers as Record<string, string> | undefined
-    });
+      const res = await axiosInstance.request<T>({
+        url: endpoint,
+        method,
+        data,
+        headers: options.headers as Record<string, string> | undefined
+      });
 
-    const payload = res.data as unknown as BackendEnvelope<T>;
-    
-    if (payload.error || (payload.success === false)) {
-      return { success: false, error: payload.error ?? payload.message ?? "Request failed", errors: payload.errors };
+      const payload = res.data as unknown as BackendEnvelope<T>;
+
+      // eslint-disable-next-line no-console
+      console.log("[api] response", `${API_BASE_URL}${endpoint}`, { ok: !(payload.error || payload.success === false) });
+
+      if (payload.error || (payload.success === false)) {
+        return { success: false, error: payload.error ?? payload.message ?? "Request failed", errors: payload.errors };
+      }
+
+      return {
+        success: true,
+        data: (payload.subscription ?? payload.data ?? (res.data as unknown as T)),
+        message: payload.message
+      };
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("[api] error", `${API_BASE_URL}${endpoint}`, err);
+      const message = (err as { message?: string })?.message || "Network error";
+      return { success: false, error: message };
     }
-
-    return {
-      success: true,
-      data: (payload.subscription ?? payload.data ?? (res.data as unknown as T)),
-      message: payload.message
-    };
   }
 
   // Create a new subscription
@@ -75,7 +89,8 @@ class ApiService {
       phone: subscriptionData.phone || ""  // backend expects 'phone' field
     };
 
-    return this.request('/api/subscription', {
+    // Base URL already contains /api
+    return this.request('/subscription', {
       method: 'POST',
       body: JSON.stringify(transformedData),
     });
@@ -83,7 +98,7 @@ class ApiService {
 
   // Get server status
   async getServerStatus(): Promise<ApiResponse> {
-    return this.request('/status');
+    return this.request('/status'); // backend now mirrors /api/status
   }
 
   // Get all subscribers
@@ -103,7 +118,7 @@ class ApiService {
 
   // Detect weather events by city
   async detectEventsByCity(city: string): Promise<ApiResponse> {
-    return this.request(`/events/detect/${encodeURIComponent(city)}`);
+    return this.request(`/events/city/${encodeURIComponent(city)}`);
   }
 
   // Delete subscription
@@ -115,9 +130,7 @@ class ApiService {
 
   // Unsubscribe using ID
   async unsubscribe(id: string): Promise<ApiResponse> {
-    return this.request(`/unsubscribe/${id}`, {
-      method: 'DELETE',
-    });
+    return this.request(`/subscription/${id}/unsubscribe`);
   }
 }
 

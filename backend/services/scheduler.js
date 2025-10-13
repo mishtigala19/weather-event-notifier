@@ -88,16 +88,18 @@ class WeatherScheduler {
             }
 
             // Get current weather for user's location
-            const weatherData = await weatherService.getWeatherByCity(location.city);
-            if (!weatherData.success) {
-                console.error(`❌ Failed to get weather for ${location.city}:`, weatherData.error);
+            let weatherData;
+            try {
+                weatherData = await weatherService.getWeatherByCity(location.city);
+            } catch (e) {
+                console.error(`❌ Failed to get weather for ${location.city}:`, e.message);
                 await this.updateLastChecked(subscription._id);
                 return false;
             }
 
             // Check for events
             const detector = new EventDetector();
-            const events = detector.detectEvents(weatherData.data);
+            const events = detector.detectEvents(weatherData);
 
             // Check for alert time
             const nowInZone = getNowInZone(timezone);
@@ -182,13 +184,13 @@ class WeatherScheduler {
     // Send SMS alert
     async sendSMSAlert(phone, alerts, weatherData, location) {
         try {
-            const temp = Math.round(weatherData.main.temp - 273.15);
+            const temp = Math.round(weatherData.current.temperature);
             const alertTypes = alerts.map(a => a.title).join(', ');
 
             // Create message with unsubscribe link
-            const unsubscribeLink = `${process.env.BASE_URL || 'http://localhost:3001'}/api/unsubscribe?phone=${encodeURIComponent(phone)}`;
+            const unsubscribeLink = `${process.env.BASE_URL || 'http://localhost:5001'}/api/subscription/${encodeURIComponent(subscription._id)}/unsubscribe`;
 
-            const message = `Weather Alert for ${location.city}: ${alertTypes}. Current: ${temp}°C, ${weatherData.weather[0].description}. Unsubscribe: ${unsubscribeLink}`;
+            const message = `Weather Alert for ${location.city}: ${alertTypes}. Current: ${temp}°C, ${weatherData.current.description}. Unsubscribe: ${unsubscribeLink}`;
 
             const result = await smsService.sendSMS(phone, message);
 

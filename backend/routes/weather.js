@@ -51,7 +51,7 @@ router.get('/city/:cityName', async (req, res) => {
     }
 
     const weatherData = await weatherService.getWeatherByCity(cityName);
-    const weatherCode = weatherData.weather[0].id;
+    const weatherCode = weatherData.current.code;
     const alertType = mapWeatherCodeToAlert(weatherCode);
 
     
